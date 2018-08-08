@@ -5,12 +5,6 @@ const schedule = require('node-schedule');
 const EXPIRY_SEC = 60; // Needs to be at least 10s and no more than 60s
 const EXPIRY_MS = EXPIRY_SEC * 1000;
 
-function callOnSecondsSchedule(secondsSchedule, task) {
-  let rule = new schedule.RecurrenceRule();
-  rule.second = x;
-  return schedule.scheduleJob(rule, task);
-}
-
 class MemoryNonceStore() {
   constructor(options) {
     // Record start time (nothing older than start will be allowed)
