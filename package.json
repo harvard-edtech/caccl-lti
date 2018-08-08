@@ -1,0 +1,32 @@
+{
+  "name": "lti-launch-validator",
+  "version": "1.0.0",
+  "description": "LTI launch validator for IMS-LTI standard launches.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabeabrams/lti-launch-validator.git"
+  },
+  "keywords": [
+    "IMS",
+    "LTI",
+    "Canvas",
+    "Launch",
+    "Validate",
+    "Validator"
+  ],
+  "author": "Gabriel Abrams <gabeabrams@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gabeabrams/lti-launch-validator/issues"
+  },
+  "homepage": "https://github.com/gabeabrams/lti-launch-validator#readme",
+  "dependencies": {
+    "async-lock": "^1.1.3",
+    "node-forge": "^0.7.5",
+    "node-schedule": "^1.3.0"
+  }
+}
