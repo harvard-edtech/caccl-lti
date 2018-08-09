@@ -1,6 +1,6 @@
-const hash = require('./utils/hmac-sha1.js');
-const MemoryNonceStore = require('./classes/MemoryNonceStore.js');
-
+const genSignature = require('./genSignature.js');
+const MemoryNonceStore = require('./MemoryNonceStore.js');
+const lti = require('ims-lti');
 class Validator {
   constructor(options) {
     options = options || {};
@@ -16,26 +16,26 @@ class Validator {
 
   /**
    * Checks of an LTI launch request is valid
-   * @param {object} req - Express request object or JSON POST body
-   *   (e.g., req.body)
+   * @param {object} req - Express request object
    * @return Promise that resolves if valid, rejects if invalid
    */
   isValid(req) {
-    // Detect request object and extract body
-    let body = req;
-    if (
-      req.method &&
-      req.method === 'POST' &&
-      req.hostname &&
-      req.body
-    ) {
-      body = req.body;
-    }
+    let provider = new lti.Provider(this.consumerKey, this.consumerSecret);
+    provider.valid_request(req, (err, isValid) => {});
 
     return new Promise((resolve, reject) => {
+      // Check signature
+      const generatedSignature = genSignature(req, this.consumerSecret);
+      console.log('Our generated', generatedSignature);
+      if (generatedSignature !== req.body.oauth_signature) {
+        // Invalid
+        return reject(new Error('Invalid signature!'));
+      }
 
+      // Check nonce
+      return this.nonceStore.check(req.body.oauth_nonce, req.body.oauth_timestamp);
     });
   }
 }
 
-module.exports = createValidator;
+module.exports = Validator;

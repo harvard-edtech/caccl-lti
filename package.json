@@ -4,7 +4,8 @@
   "description": "LTI launch validator for IMS-LTI standard launches.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha",
+    "ltitest": "node ./test/lti/spinUpServer.js"
   },
   "repository": {
     "type": "git",
@@ -25,8 +26,20 @@
   },
   "homepage": "https://github.com/gabeabrams/lti-launch-validator#readme",
   "dependencies": {
-    "async-lock": "^1.1.3",
+    "ims-lti": "^3.0.2",
+    "locks": "^0.2.2",
     "node-forge": "^0.7.5",
-    "node-schedule": "^1.3.0"
+    "node-schedule": "^1.3.0",
+    "url": "^0.11.0"
+  },
+  "devDependencies": {
+    "body-parser": "^1.18.3",
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "express": "^4.16.3",
+    "fs": "0.0.1-security",
+    "https": "^1.0.0",
+    "mocha": "^5.2.0",
+    "prompt-sync": "^4.1.6"
   }
 }
