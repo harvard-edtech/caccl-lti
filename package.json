@@ -17,7 +17,8 @@
     "Canvas",
     "Launch",
     "Validate",
-    "Validator"
+    "Validator",
+    "CACCL",
   ],
   "author": "Gabriel Abrams <gabeabrams@gmail.com>",
   "license": "MIT",
@@ -26,10 +27,10 @@
   },
   "homepage": "https://github.com/gabeabrams/lti-launch-validator#readme",
   "dependencies": {
-    "ims-lti": "^3.0.2",
+    "fast-clone": "^1.5.3",
     "locks": "^0.2.2",
-    "node-forge": "^0.7.5",
     "node-schedule": "^1.3.0",
+    "oauth-signature": "^1.5.0",
     "url": "^0.11.0"
   },
   "devDependencies": {

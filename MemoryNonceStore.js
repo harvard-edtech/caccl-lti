@@ -2,22 +2,30 @@ const locks = require('locks');
 const schedule = require('node-schedule');
 
 // The max age of an acceptable nonce
-const EXPIRY_SEC = 60; // Needs to be at least 10s and no more than 60s
+const EXPIRY_SEC = 55; // Needs to be at least 10s and no more than 55s
 const EXPIRY_MS = EXPIRY_SEC * 1000;
 
 class MemoryNonceStore {
-  constructor(options) {
+
+  constructor() {
     // Record start time (nothing older than start will be allowed)
     this.startTime = Date.now();
 
     // Maps: nonce => true/false (was used in last expiryTime)
+    // - Newly used nonces are added to isUsedPrime
+    // - Each "rotation", nonces are moved from isUsedPrime => isUsedSecondary
+    //     and nonces in isUsedSecondary are deleted
+    // - Rotations occur on the minute
+    // - Because rotations occur every minute, the shortest a nonce will be
+    //     stored is one minute. Thus, the expiry time must be less than 60s,
+    //     55s to be safe
     this.isUsedMutex = locks.createMutex();
     this.isUsedPrime = {};
     this.isUsedSecondary = {};
 
-    // Start rotation for every minute
+    // Schedule rotation for every minute
     schedule.scheduleJob('* * * * *', () => {
-      this._rotate
+      this._rotate();
     });
   }
 
@@ -25,6 +33,8 @@ class MemoryNonceStore {
    * Checks if a new nonce is valid, mark it as used
    * @param {string} nonce - OAuth nonce
    * @param {string} timestamp - OAuth timestamp
+   * @return Promise that resolves if nonce is valid, rejects with error if
+   *   nonce is invalid.
    */
   check(nonce, timestamp) {
     return new Promise((resolve, reject) => {
@@ -42,6 +52,10 @@ class MemoryNonceStore {
       if (isNaN(timestamp)) {
         return reject(new Error('Timestamp is not a number.'));
       }
+
+      // Convert oauth timestamp to ms (we now know it's a number)
+      timestamp *= 1000;
+
       // > Check if from before start
       if (timestamp < this.startTime) {
         return reject(new Error('Nonce too old.'));
@@ -55,27 +69,30 @@ class MemoryNonceStore {
 
       // Manage nonce
       this.isUsedMutex.lock(() => {
-        // Check if used
-        if (this.isUsedPrime[nonce] || this.isUsedSecondary[nonce]) {
-          // Already used
-          return reject(new Error('Nonce already used.'));
+        try {
+          // Check if used
+          if (this.isUsedPrime[nonce] || this.isUsedSecondary[nonce]) {
+            // Already used
+            this.isUsedMutex.unlock();
+            return reject(new Error('Nonce already used.'));
+          }
+
+          // Mark as used
+          this.isUsedPrime[nonce] = true;
+          this.isUsedMutex.unlock();
+          return resolve();
+        } catch (err) {
+          // An error occured!
+          this.isUsedMutex.unlock();
+          return reject(err);
         }
-
-        // Mark as used
-        this.isUsedPrime[nonce] = true;
-
-        this.isUsedMutex.unlock();
-        return resolve();
-      }).catch((err) => {
-        this.isUsedMutex.unlock();
-        return reject(err);
       });
     });
   }
 
   /**
-   * Performs a maintenance rotation:
-   * primary => secondary => expired
+   * Performs a maintenance rotation: nonces are moved from
+   *   isUsedPrime => isUsedSecondary and nonces in isUsedSecondary are deleted
    */
   _rotate() {
     this.isUsedMutex.lock(() => {
