@@ -2,8 +2,8 @@
 Validates LTI launch requests.
 
 ## Part of the CACCL library
-Canvas
-App
-Complete
-Connection
-Library
+**C**anvas  
+**A**pp  
+**C**omplete  
+**C**onnection  
+**L**ibrary  
