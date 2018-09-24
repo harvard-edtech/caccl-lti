@@ -1,7 +1,7 @@
 const crypto = require('crypto');
 const urlLib = require('url');
 
-function encode(str) {
+function _encode(str) {
   // Taken from ims-lti
   // https://www.npmjs.com/package/ims-lti
   // lib/utils.js
@@ -18,19 +18,19 @@ module.exports = (req, consumerSecret) => {
       continue;
     }
     // Build component
-    const component = key + '=' + encode(req.body[key]);
+    const component = key + '=' + _encode(req.body[key]);
     valuesToSign.push(component);
   }
 
   // Create string to sign
-  const stringToSign = encode(valuesToSign.sort().join('&'));
+  const stringToSign = _encode(valuesToSign.sort().join('&'));
 
   // Build signature
-  let path = urlLib.parse(req.originalUrl || req.url).pathname;
-  let url = req.protocol + '://' + req.headers.host + path;
+  const path = urlLib.parse(req.originalUrl || req.url).pathname;
+  const url = req.protocol + '://' + req.headers.host + path;
   const textToSign = [
     req.method.toUpperCase(),
-    encode(url),
+    _encode(url),
     stringToSign
   ].join('&');
 

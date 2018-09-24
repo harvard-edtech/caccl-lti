@@ -47,16 +47,14 @@ class MemoryNonceStore {
         return reject(new Error('Nonce too old.'));
       }
       // > Check if expired
-      let msDiff = Math.abs(Date.now() - timestamp);
+      const msDiff = Math.abs(Date.now() - timestamp);
       if (msDiff > EXPIRY_MS) {
         // Expired!
         return reject(new Error('Nonce expired.'));
       }
 
-      console.log(this.isUsedMutex);
       // Manage nonce
       this.isUsedMutex.lock(() => {
-        console.log('Locked');
         // Check if used
         if (this.isUsedPrime[nonce] || this.isUsedSecondary[nonce]) {
           // Already used
