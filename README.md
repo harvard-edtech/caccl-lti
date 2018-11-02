@@ -1,5 +1,5 @@
-# caccl-launch-validator
-Validates LTI launch requests.
+# caccl-lti-manager
+Validates and parses LTI launch requests.
 
 ## Part of the CACCL library
 **C**anvas  
