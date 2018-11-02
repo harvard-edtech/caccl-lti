@@ -23,7 +23,9 @@
     "max-len": [ "error",
       {
         "code": 80,
-        "ignoreStrings": true
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreUrls": true
       }
     ],
     "no-plusplus": [ "warn", { "allowForLoopAfterthoughts": true }],
@@ -35,7 +37,7 @@
          "object": true
         },
         "AssignmentExpression": {
-          "array": true,
+          "array": false,
           "object": true
         }
       },
