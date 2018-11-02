@@ -53,12 +53,12 @@ const CANVAS_CUSTOM_PARAMS = [
  * @param {object} app - express app to add routes to
  * @param {string} consumerKey - an LTI consumer key to compare against during
  *   launch validation
+ * @param {string} consumerSecret - an LTI consumer secret to use for
+ *   signature signing
  * @param {string} [launchPath=/launch] - the express path to catch POST launch
  *   requests from
  * @param {string} [redirectToAfterLaunch=same as launchPath] - the path to
  *   redirect to after a successful launch
- * @param {string} consumerSecret - an LTI consumer secret to use for
- *   signature signing
  * @param {object} [nonceStore=memory store] - a nonce store to use for
  *   keeping track of used nonces
  */
