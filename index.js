@@ -60,7 +60,14 @@ const CANVAS_CUSTOM_PARAMS = [
  * @param {string} [redirectToAfterLaunch=same as launchPath] - the path to
  *   redirect to after a successful launch
  * @param {object} [nonceStore=memory store] - a nonce store to use for
- *   keeping track of used nonces
+ *   keeping track of used nonces of form { check } where check is a function:
+ *   (nonce, timestamp) => Promise that resolves if valid, rejects if invalid
+ * @param {string} [authorizePath] - the authorization path as set up by
+ *   caccl-token-manager. Only valid if authorizeOnLaunch is truthy
+ * @param {boolean} [authorizeOnLaunch] - if truthy, redirects to authorizePath
+ *   after launch is validated and parsed (and includes redirectToAfterLaunch)
+ *   as the 'next' link so that caccl-token-manager redirects to
+ *   redirectToAfterLaunch after finishing authorization
  */
 module.exports = (config) => {
   // Create validator
@@ -135,6 +142,9 @@ module.exports = (config) => {
           || req.session.launchInfo.isNonCreditLearner
         );
 
+        // Save current user id for caccl-token-manager
+        req.session.currentUserCanvasId = req.session.launchInfo.userId;
+
         // Add custom parameters
         req.session.launchInfo.customParams = {};
         Object.keys(req.body).forEach((prop) => {
@@ -162,6 +172,12 @@ module.exports = (config) => {
       })
       .then(() => {
         // Session saved! Now redirect.
+        if (config.authorizeOnLaunch && config.authorizePath) {
+          // We're authorizing on launch, so redirect to the authorize path and
+          // include redirectToAfterLaunch as the 'next' url
+          return res.redirect(`${config.authorizePath}?next=${redirectToAfterLaunch}`);
+        }
+        // Not authorizing on launch. Redirect to redirectToAfterLaunch
         return res.redirect(redirectToAfterLaunch);
       })
       .catch(() => {
