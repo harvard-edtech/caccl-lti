@@ -13,7 +13,8 @@ class Validator {
    * @param {string} consumerSecret - an LTI consumer secret to use for
    *   signature signing
    * @param {object} [nonceStore=memory store] - a nonce store to use for
-   *   keeping track of used nonces
+   *   keeping track of used nonces of form { check } where check is a function:
+   *   (nonce, timestamp) => Promise that resolves if valid, rejects if invalid
    */
   constructor(config = {}) {
     this.nonceStore = config.nonceStore || new MemoryNonceStore();
