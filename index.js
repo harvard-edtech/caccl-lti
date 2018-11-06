@@ -72,8 +72,8 @@ const CANVAS_CUSTOM_PARAMS = [
 module.exports = (config) => {
   // Create validator
   const validator = new Validator({
-    consumerKey: config.consumerKey,
-    consumerSecret: config.consumerSecret,
+    consumerKey: config.installationCredentials.consumer_key,
+    consumerSecret: config.installationCredentials.consumer_secret,
     nonceStore: config.nonceStore,
   });
 
@@ -144,6 +144,9 @@ module.exports = (config) => {
 
         // Save current user id for caccl-token-manager
         req.session.currentUserCanvasId = req.session.launchInfo.userId;
+
+        // Save canvas host for caccl
+        req.session.canvasHost = req.session.launchInfo.canvasHost;
 
         // Add custom parameters
         req.session.launchInfo.customParams = {};
