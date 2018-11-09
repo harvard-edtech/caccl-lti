@@ -51,10 +51,10 @@ const CANVAS_CUSTOM_PARAMS = [
  * Create a new validator and sets up route for launch validation and lti
  *   launch information extraction
  * @param {object} app - express app to add routes to
- * @param {string} consumerKey - an LTI consumer key to compare against during
- *   launch validation
- * @param {string} consumerSecret - an LTI consumer secret to use for
- *   signature signing
+ * @param {string} installationCredentials.consumer_key - an LTI consumer key to
+ *   compare against during launch validation
+ * @param {string} installationCredentials.consumer_secret - an LTI consumer
+ *   secret to use for signature signing
  * @param {string} [launchPath=/launch] - the express path to catch POST launch
  *   requests from
  * @param {string} [redirectToAfterLaunch=same as launchPath] - the path to
@@ -70,10 +70,18 @@ const CANVAS_CUSTOM_PARAMS = [
  *   redirectToAfterLaunch after finishing authorization
  */
 module.exports = (config) => {
+  if (
+    !config.installationCredentials
+    || !config.installationCredentials.consumer_key
+    || !config.installationCredentials.consumer_secret
+  ) {
+    // Required credentials weren't included
+    throw new Error('CACCL LTI Manager can\'t be initialized without installationCredentials of the form: { consumer_key, consumer_secret }!');
+  }
   // Create validator
   const validator = new Validator({
-    consumerKey: config.installationCredentials.consumer_key,
-    consumerSecret: config.installationCredentials.consumer_secret,
+    consumer_key: config.installationCredentials.consumer_key,
+    consumer_secret: config.installationCredentials.consumer_secret,
     nonceStore: config.nonceStore,
   });
 

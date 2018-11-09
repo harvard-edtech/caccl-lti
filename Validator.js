@@ -8,9 +8,9 @@ const MemoryNonceStore = require('./MemoryNonceStore.js');
 class Validator {
   /**
    * Creates a new Validator
-   * @param {string} consumerKey - an LTI consumer id to compare against during
+   * @param {string} consumer_key - an LTI consumer id to compare against during
    *   launch validation
-   * @param {string} consumerSecret - an LTI consumer secret to use for
+   * @param {string} consumer_secret - an LTI consumer secret to use for
    *   signature signing
    * @param {object} [nonceStore=memory store] - a nonce store to use for
    *   keeping track of used nonces of form { check } where check is a function:
@@ -20,14 +20,14 @@ class Validator {
     this.nonceStore = config.nonceStore || new MemoryNonceStore();
 
     // Consumer credentials
-    if (!config.consumerSecret) {
-      throw new Error('Validator requires consumerSecret');
+    if (!config.consumer_secret) {
+      throw new Error('Validator requires consumer_secret');
     }
-    this.consumerSecret = config.consumerSecret;
-    if (!config.consumerKey) {
-      throw new Error('Validator requires consumerKey');
+    this.consumer_secret = config.consumer_secret;
+    if (!config.consumer_key) {
+      throw new Error('Validator requires consumer_key');
     }
-    this.consumerKey = config.consumerKey;
+    this.consumer_key = config.consumer_key;
   }
 
   /**
@@ -36,11 +36,11 @@ class Validator {
    * @return {Promise} promise that resolves if valid, rejects if invalid
    */
   isValid(req) {
-    // Check that consumerKey is valid
+    // Check that consumer_key is valid
     if (
       !req.body
       || !req.body.oauth_consumer_key
-      || req.body.oauth_consumer_key !== this.consumerKey
+      || req.body.oauth_consumer_key !== this.consumer_key
     ) {
       // No consumer key or consumer key didn't match (reject immediately)
       return Promise.reject();
@@ -85,7 +85,7 @@ class Validator {
         req.method,
         url,
         body,
-        this.consumerSecret
+        this.consumer_secret
       )
     );
 
