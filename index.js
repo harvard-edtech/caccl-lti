@@ -63,11 +63,11 @@ const CANVAS_CUSTOM_PARAMS = [
  *   keeping track of used nonces of form { check } where check is a function:
  *   (nonce, timestamp) => Promise that resolves if valid, rejects if invalid
  * @param {string} [authorizePath] - the authorization path as set up by
- *   caccl-token-manager. Only valid if authorizeOnLaunch is truthy
- * @param {boolean} [authorizeOnLaunch] - if truthy, redirects to authorizePath
- *   after launch is validated and parsed (and includes redirectToAfterLaunch)
- *   as the 'next' link so that caccl-token-manager redirects to
- *   redirectToAfterLaunch after finishing authorization
+ *   caccl-token-manager. Only valid if disableAuthorizeOnLaunch is falsy
+ * @param {boolean} [disableAuthorizeOnLaunch] - if falsy, redirects to
+ *   authorizePath after launch is validated and parsed (and includes
+ *   redirectToAfterLaunch) as the 'next' link so that caccl-token-manager
+ *   redirects to redirectToAfterLaunch after finishing authorization
  */
 module.exports = (config) => {
   if (
@@ -89,8 +89,9 @@ module.exports = (config) => {
   const launchPath = config.launchPath || '/launch';
   const redirectToAfterLaunch = config.redirectToAfterLaunch || launchPath;
 
-  // Add route for launch validation
+  // Handle POST launch requests
   config.app.post(launchPath, (req, res) => {
+    // This is an LTI launch. Handle it
     // Validate the launch request
     validator.isValid(req)
       .then(() => {
@@ -183,10 +184,10 @@ module.exports = (config) => {
       })
       .then(() => {
         // Session saved! Now redirect.
-        if (config.authorizeOnLaunch && config.authorizePath) {
+        if (!config.disableAuthorizeOnLaunch) {
           // We're authorizing on launch, so redirect to the authorize path and
           // include redirectToAfterLaunch as the 'next' url
-          return res.redirect(`${config.authorizePath}?next=${redirectToAfterLaunch}`);
+          return res.redirect(`${config.launchPath}?next=${redirectToAfterLaunch}`);
         }
         // Not authorizing on launch. Redirect to redirectToAfterLaunch
         return res.redirect(redirectToAfterLaunch);
