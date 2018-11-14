@@ -89,6 +89,99 @@ module.exports = (config) => {
   const launchPath = config.launchPath || '/launch';
   const redirectToAfterLaunch = config.redirectToAfterLaunch || launchPath;
 
+  // Set up launch parser middleware
+  config.app.use(launchPath, (req, res, next) => {
+    // Add function that parses an LTI launch body
+    req._parseLaunch = (launchBody = req.body) => {
+      // Parse launch and save it to session
+      req.session.launchInfo = {
+        timestamp: launchBody.oauth_timestamp * 1000,
+        contextId: launchBody.context_id,
+        contextLabel: launchBody.contextLabel,
+        canvasHost: launchBody.custom_canvas_api_domain,
+        courseId: parseIntIfTruthy(launchBody.custom_canvas_course_id),
+        enrollmentState: launchBody.custom_canvas_enrollment_state,
+        userId: parseIntIfTruthy(launchBody.custom_canvas_user_id),
+        userLoginId: launchBody.custom_canvas_user_login_id,
+        workflowState: launchBody.custom_canvas_workflow_state,
+        extRoles: splitIfTruthy(launchBody.ext_roles),
+        launchPresentationTarget:
+          launchBody.launch_presentation_document_target,
+        iframeWidth: launchBody.launch_presentation_width,
+        iframeHeight: launchBody.launch_presentation_height,
+        locale: launchBody.launch_presentation_locale,
+        returnURL: launchBody.launch_presentation_return_url,
+        userEmail: launchBody.lis_person_contact_email_primary,
+        userLastName: launchBody.lis_person_name_family,
+        userFullName: launchBody.lis_person_name_full,
+        userFirstName: launchBody.lis_person_name_given,
+        launchAppTitle: launchBody.resource_link_title,
+        roles: splitIfTruthy(launchBody.roles),
+        canvasInstance: launchBody.tool_consumer_instance_name,
+        userImage: launchBody.user_image,
+      };
+
+      // Add simpler role booleans
+      req.session.launchInfo.isInstructor = valueInList(
+        'urn:lti:role:ims/lis/Instructor',
+        req.session.launchInfo.extRoles
+      );
+      req.session.launchInfo.isTA = valueInList(
+        'urn:lti:role:ims/lis/TeachingAssistant',
+        req.session.launchInfo.extRoles
+      );
+      req.session.launchInfo.isDesigner = valueInList(
+        'urn:lti:role:ims/lis/ContentDeveloper',
+        req.session.launchInfo.extRoles
+      );
+      req.session.launchInfo.isCreditLearner = valueInList(
+        'urn:lti:role:ims/lis/Learner',
+        req.session.launchInfo.extRoles
+      );
+      req.session.launchInfo.isNonCreditLearner = valueInList(
+        'urn:lti:role:ims/lis/Learner/NonCreditLearner',
+        req.session.launchInfo.extRoles
+      );
+      req.session.launchInfo.isLearner = (
+        req.session.launchInfo.isCreditLearner
+        || req.session.launchInfo.isNonCreditLearner
+      );
+
+      // Save current user id for caccl-token-manager
+      req.session.currentUserCanvasId = req.session.launchInfo.userId;
+
+      // Save canvas host for caccl
+      req.session.canvasHost = req.session.launchInfo.canvasHost;
+
+      // Add custom parameters
+      req.session.launchInfo.customParams = {};
+      Object.keys(launchBody).forEach((prop) => {
+        // Check if this is a custom param that wasn't sent by Canvas itself
+        if (
+          !prop.startsWith('custom_')
+          || CANVAS_CUSTOM_PARAMS.indexOf(prop) >= 0
+        ) {
+          // Not a custom parameter. Skip!
+          return;
+        }
+        // Save custom parameter
+        req.session.launchInfo.customParams[prop] = launchBody[prop];
+      });
+
+      // Save session
+      return new Promise((resolve, reject) => {
+        req.session.save((err) => {
+          if (err) {
+            return reject(err);
+          }
+          return resolve();
+        });
+      });
+    };
+
+    next();
+  });
+
   // Handle POST launch requests
   config.app.post(launchPath, (req, res) => {
     // This is an LTI launch. Handle it
@@ -96,91 +189,7 @@ module.exports = (config) => {
     validator.isValid(req)
       .then(() => {
         // This is a valid launch request
-
-        // Parse launch and save it to session
-        req.session.launchInfo = {
-          timestamp: req.body.oauth_timestamp,
-          contextId: req.body.context_id,
-          contextLabel: req.body.contextLabel,
-          canvasHost: req.body.custom_canvas_api_domain,
-          courseId: parseIntIfTruthy(req.body.custom_canvas_course_id),
-          enrollmentState: req.body.custom_canvas_enrollment_state,
-          userId: parseIntIfTruthy(req.body.custom_canvas_user_id),
-          userLoginId: req.body.custom_canvas_user_login_id,
-          workflowState: req.body.custom_canvas_workflow_state,
-          extRoles: splitIfTruthy(req.body.ext_roles),
-          launchPresentationTarget:
-            req.body.launch_presentation_document_target,
-          iframeWidth: req.body.launch_presentation_width,
-          iframeHeight: req.body.launch_presentation_height,
-          locale: req.body.launch_presentation_locale,
-          returnURL: req.body.launch_presentation_return_url,
-          userEmail: req.body.lis_person_contact_email_primary,
-          userLastName: req.body.lis_person_name_family,
-          userFullName: req.body.lis_person_name_full,
-          userFirstName: req.body.lis_person_name_given,
-          launchAppTitle: req.body.resource_link_title,
-          roles: splitIfTruthy(req.body.roles),
-          canvasInstance: req.body.tool_consumer_instance_name,
-          userImage: req.body.user_image,
-        };
-
-        // Add simpler role booleans
-        req.session.launchInfo.isInstructor = valueInList(
-          'urn:lti:role:ims/lis/Instructor',
-          req.session.launchInfo.extRoles
-        );
-        req.session.launchInfo.isTA = valueInList(
-          'urn:lti:role:ims/lis/TeachingAssistant',
-          req.session.launchInfo.extRoles
-        );
-        req.session.launchInfo.isDesigner = valueInList(
-          'urn:lti:role:ims/lis/ContentDeveloper',
-          req.session.launchInfo.extRoles
-        );
-        req.session.launchInfo.isCreditLearner = valueInList(
-          'urn:lti:role:ims/lis/Learner',
-          req.session.launchInfo.extRoles
-        );
-        req.session.launchInfo.isNonCreditLearner = valueInList(
-          'urn:lti:role:ims/lis/Learner/NonCreditLearner',
-          req.session.launchInfo.extRoles
-        );
-        req.session.launchInfo.isLearner = (
-          req.session.launchInfo.isCreditLearner
-          || req.session.launchInfo.isNonCreditLearner
-        );
-
-        // Save current user id for caccl-token-manager
-        req.session.currentUserCanvasId = req.session.launchInfo.userId;
-
-        // Save canvas host for caccl
-        req.session.canvasHost = req.session.launchInfo.canvasHost;
-
-        // Add custom parameters
-        req.session.launchInfo.customParams = {};
-        Object.keys(req.body).forEach((prop) => {
-          // Check if this is a custom param that wasn't sent by Canvas itself
-          if (
-            !prop.startsWith('custom_')
-            || CANVAS_CUSTOM_PARAMS.indexOf(prop) >= 0
-          ) {
-            // Not a custom parameter. Skip!
-            return;
-          }
-          // Save custom parameter
-          req.session.launchInfo.customParams[prop] = req.body[prop];
-        });
-
-        // Save session
-        return new Promise((resolve, reject) => {
-          req.session.save((err) => {
-            if (err) {
-              return reject(err);
-            }
-            return resolve();
-          });
-        });
+        return req._parseLaunch();
       })
       .then(() => {
         // Session saved! Now redirect.
