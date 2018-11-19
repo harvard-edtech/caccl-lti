@@ -28,6 +28,12 @@
         "ignoreUrls": true
       }
     ],
+    "newline-per-chained-call": [
+      "error",
+      {
+        "ignoreChainWithDepth": 2
+      }
+    ],
     "no-plusplus": [ "warn", { "allowForLoopAfterthoughts": true }],
     "prefer-template": "off",
     "prefer-destructuring": [ "error",
