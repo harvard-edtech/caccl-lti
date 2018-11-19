@@ -17,28 +17,29 @@ let consumerKey = creds.key;
 let consumerSecret = creds.secret;
 
 const validator = new Validator({
-  consumerKey: consumerKey,
-  consumerSecret: consumerSecret
+  consumerKey,
+  consumerSecret,
 });
 
-const app = express()
+const app = express();
 // Add body parser
-app.use(bodyParser.json({limit: '5mb'}));
-app.use(bodyParser.urlencoded({extended: true, limit: '5mb'}));
+app.use(bodyParser.json({ limit: '5mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '5mb' }));
 
 app.post('/launch', (req, res) => {
   validator.isValid(req)
-  .then(() => {
-    return res.send('Valid');
-  }).catch((err) => {
-    console.log(req.body);
-    return res.send(err.message);
-  });
+    .then(() => {
+      return res.send('Valid');
+    })
+    .catch((err) => {
+      console.log(req.body);
+      return res.send(err.message);
+    });
 });
 
 const server = https.createServer({
-  key: key,
-  cert: cert
+  key,
+  cert,
 }, app);
 
 server.listen(PORT, (err) => {
@@ -47,6 +48,6 @@ server.listen(PORT, (err) => {
     console.log(err);
   } else {
     console.log('Now listening on port ' + PORT);
-    console.log('Direct LTI launch requests to:\nhttps://localhost:' + PORT + '/launch')
+    console.log('Direct LTI launch requests to:\nhttps://localhost:' + PORT + '/launch');
   }
 });
