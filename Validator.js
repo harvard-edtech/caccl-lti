@@ -2,7 +2,7 @@ const oauth = require('oauth-signature');
 const clone = require('fast-clone');
 const urlLib = require('url');
 
-const MemoryNonceStore = require('./MemoryNonceStore.js');
+const MemoryNonceStore = require('./MemoryNonceStore');
 
 /* LTI launch validator */
 class Validator {
