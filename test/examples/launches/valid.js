@@ -4,6 +4,7 @@ module.exports = {
   path: '/launch',
   url: 'https://localhost:8080/launch',
   method: 'POST',
+  consumerKey: '5b6ee40cc9fcdaede550654a93307dcd',
   consumerSecret: 'c64d84750dcb21febd995058588f019f',
   examples: [
     {
@@ -22,9 +23,9 @@ module.exports = {
         resource_link_id: '30fd061cfe',
         roles: '',
         tool_consumer_instance_name: 'Organization 738',
-        user_id: 'b029d74d0a'
+        user_id: 'b029d74d0a',
       },
-      oauth_signature: '/tuo1sYQB8oKiKfbR7xB7ayuv0s='
+      oauth_signature: '/tuo1sYQB8oKiKfbR7xB7ayuv0s=',
     },
     {
       body: {
@@ -42,9 +43,9 @@ module.exports = {
         resource_link_id: 'ca96a54273',
         roles: 'urn:lti:instrole:ims/lis/administrator',
         tool_consumer_instance_name: 'Class 465',
-        user_id: 'b0a13934a8'
+        user_id: 'b0a13934a8',
       },
-      oauth_signature: 's182wI2czmouKeqG5Bj7aX7N5BQ='
+      oauth_signature: 's182wI2czmouKeqG5Bj7aX7N5BQ=',
     },
     {
       body: {
@@ -62,9 +63,9 @@ module.exports = {
         resource_link_id: '98808b973e',
         roles: 'urn:lti:instrole:ims/lis/administrator,contentdeveloper',
         tool_consumer_instance_name: 'Organization 694',
-        user_id: 'e95b64247c'
+        user_id: 'e95b64247c',
       },
-      oauth_signature: 'euAsrxNdIgeVyfNuFekHvxiG6R4='
+      oauth_signature: 'euAsrxNdIgeVyfNuFekHvxiG6R4=',
     },
     {
       body: {
@@ -82,9 +83,9 @@ module.exports = {
         resource_link_id: '5c59e9effb',
         roles: 'contentdeveloper,learner',
         tool_consumer_instance_name: 'Lesson 175',
-        user_id: 'e168da5692'
+        user_id: 'e168da5692',
       },
-      oauth_signature: 'fXsKgHYdT5cn9vlo+V8mmK7E8TA='
+      oauth_signature: 'fXsKgHYdT5cn9vlo+V8mmK7E8TA=',
     },
     {
       body: {
@@ -102,9 +103,9 @@ module.exports = {
         resource_link_id: 'd198343256',
         roles: 'contentdeveloper',
         tool_consumer_instance_name: 'Section 132',
-        user_id: '162f8caddd'
+        user_id: '162f8caddd',
       },
-      oauth_signature: 'dHUT56zMsxQ347Dg7txLSh/QXmU='
+      oauth_signature: 'dHUT56zMsxQ347Dg7txLSh/QXmU=',
     },
     {
       body: {
@@ -122,9 +123,9 @@ module.exports = {
         resource_link_id: 'c94b67d719',
         roles: '',
         tool_consumer_instance_name: 'Org 176',
-        user_id: '743590b09b'
+        user_id: '743590b09b',
       },
-      oauth_signature: 'lLAv4VLvJPx55nWZWW/CsC4iSuE='
+      oauth_signature: 'lLAv4VLvJPx55nWZWW/CsC4iSuE=',
     },
     {
       body: {
@@ -142,9 +143,9 @@ module.exports = {
         resource_link_id: 'a29c2b3302',
         roles: 'instructor',
         tool_consumer_instance_name: 'Hippo 227',
-        user_id: 'f818c65b43'
+        user_id: 'f818c65b43',
       },
-      oauth_signature: 'Q8FTwKppPq4dUeWaDAIQxQK6fJ4='
+      oauth_signature: 'Q8FTwKppPq4dUeWaDAIQxQK6fJ4=',
     },
     {
       body: {
@@ -162,9 +163,9 @@ module.exports = {
         resource_link_id: 'c418e30bff',
         roles: 'instructor,urn:lti:instrole:ims/lis/administrator',
         tool_consumer_instance_name: 'Organization 153',
-        user_id: 'b5a499cbb1'
+        user_id: 'b5a499cbb1',
       },
-      oauth_signature: 'uLGGTfPBcooKMiEjmj0XR3B9//w='
+      oauth_signature: 'uLGGTfPBcooKMiEjmj0XR3B9//w=',
     },
     {
       body: {
@@ -182,9 +183,9 @@ module.exports = {
         resource_link_id: '03d1cfd3cc',
         roles: 'instructor,learner,urn:lti:instrole:ims/lis/observer',
         tool_consumer_instance_name: 'Course 425',
-        user_id: '871211cb1b'
+        user_id: '871211cb1b',
       },
-      oauth_signature: 'jyhEiDr02zX6NCjk2h5Ra3i6EWM='
+      oauth_signature: 'jyhEiDr02zX6NCjk2h5Ra3i6EWM=',
     },
     {
       body: {
@@ -202,9 +203,9 @@ module.exports = {
         resource_link_id: '1e5b961382',
         roles: 'instructor,learner',
         tool_consumer_instance_name: 'Semester 329',
-        user_id: '662bb7b093'
+        user_id: '662bb7b093',
       },
-      oauth_signature: 'B7wu5xbqqS9kXxTQj1oA6LnPf3U='
+      oauth_signature: 'B7wu5xbqqS9kXxTQj1oA6LnPf3U=',
     },
     {
       body: {
@@ -222,9 +223,9 @@ module.exports = {
         resource_link_id: 'bc1dc7f463',
         roles: 'learner',
         tool_consumer_instance_name: 'Section 59',
-        user_id: 'e8045492f4'
+        user_id: 'e8045492f4',
       },
-      oauth_signature: 'x08ZXgLTdolIgGKFJybP6qKcHpw='
+      oauth_signature: 'x08ZXgLTdolIgGKFJybP6qKcHpw=',
     },
     {
       body: {
@@ -242,9 +243,9 @@ module.exports = {
         resource_link_id: 'dddf53ad82',
         roles: 'urn:lti:instrole:ims/lis/administrator,urn:lti:instrole:ims/lis/observer',
         tool_consumer_instance_name: 'Semester 73',
-        user_id: '99ae488ac9'
+        user_id: '99ae488ac9',
       },
-      oauth_signature: 'B3bCzieTRu2LSEYeOdSsAsgW8ZE='
+      oauth_signature: 'B3bCzieTRu2LSEYeOdSsAsgW8ZE=',
     },
     {
       body: {
@@ -262,9 +263,9 @@ module.exports = {
         resource_link_id: 'f5c128505c',
         roles: 'urn:lti:instrole:ims/lis/administrator',
         tool_consumer_instance_name: 'Class 976',
-        user_id: '507c628cd3'
+        user_id: '507c628cd3',
       },
-      oauth_signature: 'MDFUkSIl3Ezrj1Vj/XFFmXZil/M='
+      oauth_signature: 'MDFUkSIl3Ezrj1Vj/XFFmXZil/M=',
     },
     {
       body: {
@@ -282,9 +283,9 @@ module.exports = {
         resource_link_id: 'e0ce63ff86',
         roles: 'urn:lti:instrole:ims/lis/observer',
         tool_consumer_instance_name: 'Hippo 79',
-        user_id: '0630fcefaa'
+        user_id: '0630fcefaa',
       },
-      oauth_signature: 'Hk9EHRn/56faP63YPR7TLF4r2Rc='
+      oauth_signature: 'Hk9EHRn/56faP63YPR7TLF4r2Rc=',
     },
     {
       body: {
@@ -302,9 +303,9 @@ module.exports = {
         resource_link_id: '0dcb11e00e',
         roles: 'learner,instructor',
         tool_consumer_instance_name: 'Section 577',
-        user_id: '0ea6087a41'
+        user_id: '0ea6087a41',
       },
-      oauth_signature: 'YtDzUMKIk+10jDd8S1jcD4/ZaxY='
+      oauth_signature: 'YtDzUMKIk+10jDd8S1jcD4/ZaxY=',
     },
     {
       body: {
@@ -322,9 +323,9 @@ module.exports = {
         resource_link_id: '8118cbb8b9',
         roles: 'urn:lti:instrole:ims/lis/administrator',
         tool_consumer_instance_name: 'Organization 524',
-        user_id: '36ebc40fd6'
+        user_id: '36ebc40fd6',
       },
-      oauth_signature: 'TYlHr/LEMHcJ7I6NumfKVhMwZOQ='
+      oauth_signature: 'TYlHr/LEMHcJ7I6NumfKVhMwZOQ=',
     },
     {
       body: {
@@ -342,9 +343,9 @@ module.exports = {
         resource_link_id: '0de022afb8',
         roles: 'urn:lti:instrole:ims/lis/observer,contentdeveloper',
         tool_consumer_instance_name: 'Lesson 376',
-        user_id: 'fcfb942965'
+        user_id: 'fcfb942965',
       },
-      oauth_signature: '0KgSci14hJb/rGcQ5ti8ma1mrL8='
+      oauth_signature: '0KgSci14hJb/rGcQ5ti8ma1mrL8=',
     },
     {
       body: {
@@ -362,9 +363,9 @@ module.exports = {
         resource_link_id: 'a1ee514703',
         roles: 'contentdeveloper,learner,instructor',
         tool_consumer_instance_name: 'Hippo 293',
-        user_id: 'ede2b52384'
+        user_id: 'ede2b52384',
       },
-      oauth_signature: 'WGyC7S/FazKvjG8LzJ4jyXiekMg='
+      oauth_signature: 'WGyC7S/FazKvjG8LzJ4jyXiekMg=',
     },
     {
       body: {
@@ -382,9 +383,9 @@ module.exports = {
         resource_link_id: '9a4a5bca8d',
         roles: 'instructor,contentdeveloper',
         tool_consumer_instance_name: 'Course 730',
-        user_id: '0592452c86'
+        user_id: '0592452c86',
       },
-      oauth_signature: '2uajeP9J3DJxjDTcNeUEtJFEPLM='
+      oauth_signature: '2uajeP9J3DJxjDTcNeUEtJFEPLM=',
     },
     {
       body: {
@@ -402,9 +403,9 @@ module.exports = {
         resource_link_id: '6e1ad5f276',
         roles: 'urn:lti:instrole:ims/lis/observer',
         tool_consumer_instance_name: 'Account 10',
-        user_id: '9f8de2186b'
+        user_id: '9f8de2186b',
       },
-      oauth_signature: 'uV2JiysiwKeJHC9+/bFRuOP8ZYQ='
+      oauth_signature: 'uV2JiysiwKeJHC9+/bFRuOP8ZYQ=',
     },
     {
       body: {
@@ -422,9 +423,9 @@ module.exports = {
         resource_link_id: 'd2e6e54901',
         roles: 'learner,urn:lti:instrole:ims/lis/observer',
         tool_consumer_instance_name: 'Class 452',
-        user_id: 'dfffe35063'
+        user_id: 'dfffe35063',
       },
-      oauth_signature: 'beQd071I8qVzQVgqlz5A02oGwMk='
+      oauth_signature: 'beQd071I8qVzQVgqlz5A02oGwMk=',
     },
     {
       body: {
@@ -442,9 +443,9 @@ module.exports = {
         resource_link_id: '99ef909426',
         roles: 'learner,urn:lti:instrole:ims/lis/observer',
         tool_consumer_instance_name: 'Organization 232',
-        user_id: '96056887a8'
+        user_id: '96056887a8',
       },
-      oauth_signature: 'hROebTOj8lGOIcIgTtIZUFQsGpc='
+      oauth_signature: 'hROebTOj8lGOIcIgTtIZUFQsGpc=',
     },
     {
       body: {
@@ -462,9 +463,9 @@ module.exports = {
         resource_link_id: '3af59f6336',
         roles: 'learner',
         tool_consumer_instance_name: 'Lesson 563',
-        user_id: 'ea42ae0945'
+        user_id: 'ea42ae0945',
       },
-      oauth_signature: 'JD7X9XMTFfOEI+WNBN5X7VE1QuU='
+      oauth_signature: 'JD7X9XMTFfOEI+WNBN5X7VE1QuU=',
     },
     {
       body: {
@@ -482,9 +483,9 @@ module.exports = {
         resource_link_id: 'e583cfd4f3',
         roles: 'contentdeveloper,learner,instructor',
         tool_consumer_instance_name: 'Lesson 318',
-        user_id: 'b729a06a9f'
+        user_id: 'b729a06a9f',
       },
-      oauth_signature: 'O+WYA2Xv+tcJtqEtqrDyUIbku4I='
+      oauth_signature: 'O+WYA2Xv+tcJtqEtqrDyUIbku4I=',
     },
     {
       body: {
@@ -502,9 +503,9 @@ module.exports = {
         resource_link_id: 'aa7ffbd312',
         roles: '',
         tool_consumer_instance_name: 'Hippo 650',
-        user_id: '2d70a5f514'
+        user_id: '2d70a5f514',
       },
-      oauth_signature: '1yoIGjyOxLIw55Hpf4BhxJDvUfo='
+      oauth_signature: '1yoIGjyOxLIw55Hpf4BhxJDvUfo=',
     },
     {
       body: {
@@ -522,9 +523,9 @@ module.exports = {
         resource_link_id: '6ea3ea648b',
         roles: '',
         tool_consumer_instance_name: 'Club 684',
-        user_id: '5b4a96c612'
+        user_id: '5b4a96c612',
       },
-      oauth_signature: 'LTB8AYDXIXWfeQM/GOOXmvd8nts='
+      oauth_signature: 'LTB8AYDXIXWfeQM/GOOXmvd8nts=',
     },
     {
       body: {
@@ -542,9 +543,9 @@ module.exports = {
         resource_link_id: '076b0b84b8',
         roles: 'urn:lti:instrole:ims/lis/administrator,instructor',
         tool_consumer_instance_name: 'Semester 542',
-        user_id: '859a10a70c'
+        user_id: '859a10a70c',
       },
-      oauth_signature: 'pA/P6ijMbwRqnCMmzEtEgtxQkkI='
+      oauth_signature: 'pA/P6ijMbwRqnCMmzEtEgtxQkkI=',
     },
     {
       body: {
@@ -562,9 +563,9 @@ module.exports = {
         resource_link_id: 'a1edb1a25d',
         roles: 'learner,urn:lti:instrole:ims/lis/administrator,contentdeveloper',
         tool_consumer_instance_name: 'Account 691',
-        user_id: '91ae5d5353'
+        user_id: '91ae5d5353',
       },
-      oauth_signature: 'Yj134/narK+Xk23h8qSO7qVR8Hc='
+      oauth_signature: 'Yj134/narK+Xk23h8qSO7qVR8Hc=',
     },
     {
       body: {
@@ -582,9 +583,9 @@ module.exports = {
         resource_link_id: '4bab75fbd3',
         roles: 'contentdeveloper,instructor',
         tool_consumer_instance_name: 'Account 13',
-        user_id: 'b9e8cdf33d'
+        user_id: 'b9e8cdf33d',
       },
-      oauth_signature: 'Q37ONQ1MxMA9m27CpQIhkPiaDag='
+      oauth_signature: 'Q37ONQ1MxMA9m27CpQIhkPiaDag=',
     },
     {
       body: {
@@ -602,9 +603,9 @@ module.exports = {
         resource_link_id: '55210b3aa1',
         roles: 'learner,urn:lti:instrole:ims/lis/observer,urn:lti:instrole:ims/lis/administrator',
         tool_consumer_instance_name: 'Semester 672',
-        user_id: '9d77b53091'
+        user_id: '9d77b53091',
       },
-      oauth_signature: 'LxJ/ilJq6alEqwCw24jHQAsTx3E='
+      oauth_signature: 'LxJ/ilJq6alEqwCw24jHQAsTx3E=',
     },
     {
       body: {
@@ -622,9 +623,9 @@ module.exports = {
         resource_link_id: 'df3040ddd2',
         roles: 'urn:lti:instrole:ims/lis/observer',
         tool_consumer_instance_name: 'Semester 153',
-        user_id: 'b3a30c2dfd'
+        user_id: 'b3a30c2dfd',
       },
-      oauth_signature: '4Uuwb6Ifqw5N1REGjbAyS7FEXcY='
+      oauth_signature: '4Uuwb6Ifqw5N1REGjbAyS7FEXcY=',
     },
     {
       body: {
@@ -642,9 +643,9 @@ module.exports = {
         resource_link_id: '7a403eedf1',
         roles: 'urn:lti:instrole:ims/lis/administrator',
         tool_consumer_instance_name: 'Section 483',
-        user_id: '3f65fcc716'
+        user_id: '3f65fcc716',
       },
-      oauth_signature: 'pRC0qpw0X7BXsd7kutBz/NbI71U='
+      oauth_signature: 'pRC0qpw0X7BXsd7kutBz/NbI71U=',
     },
     {
       body: {
@@ -662,9 +663,9 @@ module.exports = {
         resource_link_id: 'a110f97499',
         roles: 'urn:lti:instrole:ims/lis/observer,urn:lti:instrole:ims/lis/administrator',
         tool_consumer_instance_name: 'Organization 892',
-        user_id: '43acbd3094'
+        user_id: '43acbd3094',
       },
-      oauth_signature: 'o9bzTJ/79ueMYLyv1SxeBma7UmI='
+      oauth_signature: 'o9bzTJ/79ueMYLyv1SxeBma7UmI=',
     },
     {
       body: {
@@ -682,9 +683,9 @@ module.exports = {
         resource_link_id: '50f0496a96',
         roles: 'instructor,urn:lti:instrole:ims/lis/administrator',
         tool_consumer_instance_name: 'Account 168',
-        user_id: '54887da7d2'
+        user_id: '54887da7d2',
       },
-      oauth_signature: '20Cx8Ky8Hh/PTAX7HMX2UCETIe0='
+      oauth_signature: '20Cx8Ky8Hh/PTAX7HMX2UCETIe0=',
     },
     {
       body: {
@@ -702,9 +703,9 @@ module.exports = {
         resource_link_id: 'ab7c852336',
         roles: 'urn:lti:instrole:ims/lis/administrator',
         tool_consumer_instance_name: 'Account 694',
-        user_id: '5abe0624f1'
+        user_id: '5abe0624f1',
       },
-      oauth_signature: 'np/JhaxtgepyqTAvkU+fqOleBD4='
+      oauth_signature: 'np/JhaxtgepyqTAvkU+fqOleBD4=',
     },
     {
       body: {
@@ -722,9 +723,9 @@ module.exports = {
         resource_link_id: '5af7adf482',
         roles: 'instructor',
         tool_consumer_instance_name: 'Semester 679',
-        user_id: '3612d64451'
+        user_id: '3612d64451',
       },
-      oauth_signature: 'XDDqKTwjNrlb1quffRCt9Lg09L4='
+      oauth_signature: 'XDDqKTwjNrlb1quffRCt9Lg09L4=',
     },
     {
       body: {
@@ -742,9 +743,9 @@ module.exports = {
         resource_link_id: 'd75dfdc1c4',
         roles: 'urn:lti:instrole:ims/lis/observer,instructor,urn:lti:instrole:ims/lis/administrator',
         tool_consumer_instance_name: 'Semester 376',
-        user_id: '02a441fbae'
+        user_id: '02a441fbae',
       },
-      oauth_signature: 'PDRGUcJ3vQ1iqkD8H7xgjVQKFQA='
+      oauth_signature: 'PDRGUcJ3vQ1iqkD8H7xgjVQKFQA=',
     },
     {
       body: {
@@ -762,9 +763,9 @@ module.exports = {
         resource_link_id: '6188971c5a',
         roles: 'learner,instructor',
         tool_consumer_instance_name: 'Org 681',
-        user_id: '3e6e0736f1'
+        user_id: '3e6e0736f1',
       },
-      oauth_signature: 'eeQMoXrqK2gCHZXQ62puqin7uOw='
+      oauth_signature: 'eeQMoXrqK2gCHZXQ62puqin7uOw=',
     },
     {
       body: {
@@ -782,9 +783,9 @@ module.exports = {
         resource_link_id: '8fd3e93ec5',
         roles: 'urn:lti:instrole:ims/lis/administrator',
         tool_consumer_instance_name: 'Lesson 61',
-        user_id: '0a330fa8db'
+        user_id: '0a330fa8db',
       },
-      oauth_signature: 'Q+9CJV1DAuO2DWMWShpgawi4UaI='
+      oauth_signature: 'Q+9CJV1DAuO2DWMWShpgawi4UaI=',
     },
     {
       body: {
@@ -802,9 +803,9 @@ module.exports = {
         resource_link_id: '22768383c3',
         roles: 'urn:lti:instrole:ims/lis/observer,urn:lti:instrole:ims/lis/administrator,learner',
         tool_consumer_instance_name: 'Lesson 462',
-        user_id: '674a74f84c'
+        user_id: '674a74f84c',
       },
-      oauth_signature: 'AbJSmHHW67q3r4gQq27ec6oQq9w='
+      oauth_signature: 'AbJSmHHW67q3r4gQq27ec6oQq9w=',
     },
     {
       body: {
@@ -822,9 +823,9 @@ module.exports = {
         resource_link_id: '924166b8cb',
         roles: 'learner,urn:lti:instrole:ims/lis/observer',
         tool_consumer_instance_name: 'Semester 18',
-        user_id: '01858c3408'
+        user_id: '01858c3408',
       },
-      oauth_signature: 'a170tEMdu6bgoysBi7CmBl0oVdw='
+      oauth_signature: 'a170tEMdu6bgoysBi7CmBl0oVdw=',
     },
     {
       body: {
@@ -842,9 +843,9 @@ module.exports = {
         resource_link_id: 'b19d519c2a',
         roles: 'urn:lti:instrole:ims/lis/administrator,learner',
         tool_consumer_instance_name: 'Semester 223',
-        user_id: '98e71c8190'
+        user_id: '98e71c8190',
       },
-      oauth_signature: 'DIoMCdp7vNACfbyIiWwgH4CUExk='
+      oauth_signature: 'DIoMCdp7vNACfbyIiWwgH4CUExk=',
     },
     {
       body: {
@@ -862,9 +863,9 @@ module.exports = {
         resource_link_id: '8c665f18ca',
         roles: 'urn:lti:instrole:ims/lis/administrator,learner',
         tool_consumer_instance_name: 'Org 118',
-        user_id: '0031c7411f'
+        user_id: '0031c7411f',
       },
-      oauth_signature: 'EyLPHrQ+Z46rRVU+2wfreq3kUKE='
+      oauth_signature: 'EyLPHrQ+Z46rRVU+2wfreq3kUKE=',
     },
     {
       body: {
@@ -882,9 +883,9 @@ module.exports = {
         resource_link_id: 'eb534bfbeb',
         roles: 'urn:lti:instrole:ims/lis/observer,contentdeveloper,urn:lti:instrole:ims/lis/administrator',
         tool_consumer_instance_name: 'Club 48',
-        user_id: '9a7a7c4615'
+        user_id: '9a7a7c4615',
       },
-      oauth_signature: 'z5OzU0P3dszaIFxT67hSIDwKBmQ='
+      oauth_signature: 'z5OzU0P3dszaIFxT67hSIDwKBmQ=',
     },
     {
       body: {
@@ -902,9 +903,9 @@ module.exports = {
         resource_link_id: '416d62388c',
         roles: 'urn:lti:instrole:ims/lis/observer',
         tool_consumer_instance_name: 'Club 116',
-        user_id: '81606ec15d'
+        user_id: '81606ec15d',
       },
-      oauth_signature: 'peYRMRPMYWlv9v8gezUyuAxk07A='
+      oauth_signature: 'peYRMRPMYWlv9v8gezUyuAxk07A=',
     },
     {
       body: {
@@ -922,9 +923,9 @@ module.exports = {
         resource_link_id: '99b59c65ce',
         roles: 'learner',
         tool_consumer_instance_name: 'Course 765',
-        user_id: '6233e036ee'
+        user_id: '6233e036ee',
       },
-      oauth_signature: '6BL5gahtm8wdMqMvjc3t1e0TEDc='
+      oauth_signature: '6BL5gahtm8wdMqMvjc3t1e0TEDc=',
     },
     {
       body: {
@@ -942,9 +943,9 @@ module.exports = {
         resource_link_id: '6592716fb0',
         roles: '',
         tool_consumer_instance_name: 'Semester 317',
-        user_id: '6eba161f35'
+        user_id: '6eba161f35',
       },
-      oauth_signature: '5FuCZs8ZxvMt+MEpGzrbfLWyHcg='
+      oauth_signature: '5FuCZs8ZxvMt+MEpGzrbfLWyHcg=',
     },
     {
       body: {
@@ -962,9 +963,9 @@ module.exports = {
         resource_link_id: 'd11d61d9f5',
         roles: 'instructor',
         tool_consumer_instance_name: 'Section 278',
-        user_id: '8a8055162e'
+        user_id: '8a8055162e',
       },
-      oauth_signature: '21P4BRTKtOyIE7T8FI1h0xGuFBI='
+      oauth_signature: '21P4BRTKtOyIE7T8FI1h0xGuFBI=',
     },
     {
       body: {
@@ -982,9 +983,9 @@ module.exports = {
         resource_link_id: '937566f2a7',
         roles: 'urn:lti:instrole:ims/lis/observer',
         tool_consumer_instance_name: 'Hippo 812',
-        user_id: '8a5cf98f24'
+        user_id: '8a5cf98f24',
       },
-      oauth_signature: 'ZgDFH3fTnNoDWO0ngzcxsnFDIjw='
+      oauth_signature: 'ZgDFH3fTnNoDWO0ngzcxsnFDIjw=',
     },
     {
       body: {
@@ -1002,9 +1003,9 @@ module.exports = {
         resource_link_id: 'f355664dc8',
         roles: '',
         tool_consumer_instance_name: 'Account 378',
-        user_id: '5860ad7d23'
+        user_id: '5860ad7d23',
       },
-      oauth_signature: 'WI3YfDbweU4d/OliIKMY+vreOdo='
+      oauth_signature: 'WI3YfDbweU4d/OliIKMY+vreOdo=',
     },
     {
       body: {
@@ -1022,9 +1023,9 @@ module.exports = {
         resource_link_id: '7f379452a4',
         roles: 'contentdeveloper,learner',
         tool_consumer_instance_name: 'Account 763',
-        user_id: 'a169f4bd32'
+        user_id: 'a169f4bd32',
       },
-      oauth_signature: 'GDGHhqY/wbkL8kfbQeV7wSf3WwY='
+      oauth_signature: 'GDGHhqY/wbkL8kfbQeV7wSf3WwY=',
     },
     {
       body: {
@@ -1042,9 +1043,9 @@ module.exports = {
         resource_link_id: 'cc35ae132b',
         roles: 'instructor,contentdeveloper,urn:lti:instrole:ims/lis/administrator',
         tool_consumer_instance_name: 'Hippo 688',
-        user_id: '6c88c43050'
+        user_id: '6c88c43050',
       },
-      oauth_signature: 'X4Dn6GsEsbyZj1Jr2ArWBJGibFU='
+      oauth_signature: 'X4Dn6GsEsbyZj1Jr2ArWBJGibFU=',
     },
     {
       body: {
@@ -1062,9 +1063,9 @@ module.exports = {
         resource_link_id: '92c8ccfa26',
         roles: 'contentdeveloper',
         tool_consumer_instance_name: 'Semester 646',
-        user_id: '44b0109104'
+        user_id: '44b0109104',
       },
-      oauth_signature: 'nFVwK367hExEWoTbvmeR+TK0Vr4='
+      oauth_signature: 'nFVwK367hExEWoTbvmeR+TK0Vr4=',
     },
     {
       body: {
@@ -1082,9 +1083,9 @@ module.exports = {
         resource_link_id: '529077ea61',
         roles: 'learner,urn:lti:instrole:ims/lis/administrator',
         tool_consumer_instance_name: 'Semester 360',
-        user_id: '53d393c398'
+        user_id: '53d393c398',
       },
-      oauth_signature: 'PnONntJ3SdE9LgjfFU3NwCQkXV0='
+      oauth_signature: 'PnONntJ3SdE9LgjfFU3NwCQkXV0=',
     },
     {
       body: {
@@ -1102,9 +1103,9 @@ module.exports = {
         resource_link_id: 'fdd8572890',
         roles: 'urn:lti:instrole:ims/lis/administrator',
         tool_consumer_instance_name: 'Course 522',
-        user_id: '99fd063adc'
+        user_id: '99fd063adc',
       },
-      oauth_signature: '3zjQGuMeL108oxgwKysjHjyUuGc='
+      oauth_signature: '3zjQGuMeL108oxgwKysjHjyUuGc=',
     },
     {
       body: {
@@ -1122,9 +1123,9 @@ module.exports = {
         resource_link_id: '791f215b40',
         roles: '',
         tool_consumer_instance_name: 'Organization 582',
-        user_id: '625f4a2927'
+        user_id: '625f4a2927',
       },
-      oauth_signature: 'G/HYTzyXJdp3PlS6HXei55H9SxE='
+      oauth_signature: 'G/HYTzyXJdp3PlS6HXei55H9SxE=',
     },
     {
       body: {
@@ -1142,9 +1143,9 @@ module.exports = {
         resource_link_id: '9ad7a57df9',
         roles: 'urn:lti:instrole:ims/lis/observer,contentdeveloper',
         tool_consumer_instance_name: 'Section 982',
-        user_id: '3f1fec09b9'
+        user_id: '3f1fec09b9',
       },
-      oauth_signature: '7VP1pwwil6ueWqcvqCLtjEJ+SBI='
+      oauth_signature: '7VP1pwwil6ueWqcvqCLtjEJ+SBI=',
     },
     {
       body: {
@@ -1162,9 +1163,9 @@ module.exports = {
         resource_link_id: 'e42acbdffc',
         roles: 'urn:lti:instrole:ims/lis/observer,instructor,learner',
         tool_consumer_instance_name: 'Org 570',
-        user_id: '26345906c9'
+        user_id: '26345906c9',
       },
-      oauth_signature: '/rXpunIA5aR55zD1ZCZOqqYCDVk='
+      oauth_signature: '/rXpunIA5aR55zD1ZCZOqqYCDVk=',
     },
     {
       body: {
@@ -1182,9 +1183,9 @@ module.exports = {
         resource_link_id: '7591ae350d',
         roles: '',
         tool_consumer_instance_name: 'Class 942',
-        user_id: 'a1ceec6a34'
+        user_id: 'a1ceec6a34',
       },
-      oauth_signature: 'Kfzmu90vzAGzH2WU/dZieM0QCBk='
+      oauth_signature: 'Kfzmu90vzAGzH2WU/dZieM0QCBk=',
     },
     {
       body: {
@@ -1202,9 +1203,9 @@ module.exports = {
         resource_link_id: '47dbcf7605',
         roles: 'learner',
         tool_consumer_instance_name: 'Org 357',
-        user_id: '4fd0027bf7'
+        user_id: '4fd0027bf7',
       },
-      oauth_signature: 'mU148IwWmuVFXI6q+XHYVIWyerA='
+      oauth_signature: 'mU148IwWmuVFXI6q+XHYVIWyerA=',
     },
     {
       body: {
@@ -1222,9 +1223,9 @@ module.exports = {
         resource_link_id: '68faf55fa3',
         roles: 'urn:lti:instrole:ims/lis/administrator',
         tool_consumer_instance_name: 'Lesson 134',
-        user_id: '7222f5f15c'
+        user_id: '7222f5f15c',
       },
-      oauth_signature: 'XQQmF6wK6t9drYC/iO+KHl2QYRo='
+      oauth_signature: 'XQQmF6wK6t9drYC/iO+KHl2QYRo=',
     },
     {
       body: {
@@ -1242,9 +1243,9 @@ module.exports = {
         resource_link_id: '3f5521a9d7',
         roles: 'learner,urn:lti:instrole:ims/lis/administrator',
         tool_consumer_instance_name: 'Lesson 924',
-        user_id: '28c70e24b7'
+        user_id: '28c70e24b7',
       },
-      oauth_signature: 'Z+FwJXJcgByf66bflZQO3aIb8rQ='
+      oauth_signature: 'Z+FwJXJcgByf66bflZQO3aIb8rQ=',
     },
     {
       body: {
@@ -1262,9 +1263,9 @@ module.exports = {
         resource_link_id: '777961c7b6',
         roles: 'contentdeveloper,learner',
         tool_consumer_instance_name: 'Course 225',
-        user_id: '4e8ae00390'
+        user_id: '4e8ae00390',
       },
-      oauth_signature: 'J8qNdGe2awIoxwg90wDjS8Ie/gk='
+      oauth_signature: 'J8qNdGe2awIoxwg90wDjS8Ie/gk=',
     },
     {
       body: {
@@ -1282,9 +1283,9 @@ module.exports = {
         resource_link_id: 'ff73e924e5',
         roles: 'urn:lti:instrole:ims/lis/observer',
         tool_consumer_instance_name: 'Lesson 648',
-        user_id: 'ef6798d8ce'
+        user_id: 'ef6798d8ce',
       },
-      oauth_signature: '96pepldToyGiuSTcmqc8Tap7EYU='
+      oauth_signature: '96pepldToyGiuSTcmqc8Tap7EYU=',
     },
     {
       body: {
@@ -1302,9 +1303,9 @@ module.exports = {
         resource_link_id: '80f6d1612d',
         roles: 'instructor',
         tool_consumer_instance_name: 'Organization 741',
-        user_id: '357957794d'
+        user_id: '357957794d',
       },
-      oauth_signature: 'ANcI4D6dn4shGFl71q6ehGZSqp4='
+      oauth_signature: 'ANcI4D6dn4shGFl71q6ehGZSqp4=',
     },
     {
       body: {
@@ -1322,9 +1323,9 @@ module.exports = {
         resource_link_id: '012cb7991c',
         roles: '',
         tool_consumer_instance_name: 'Lesson 808',
-        user_id: '83563c963a'
+        user_id: '83563c963a',
       },
-      oauth_signature: 'uMTDXsGLxvG9n3uOqifMPipwl5I='
-    }
-  ]
+      oauth_signature: 'uMTDXsGLxvG9n3uOqifMPipwl5I=',
+    },
+  ],
 };

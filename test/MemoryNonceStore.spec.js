@@ -1,20 +1,23 @@
-const chai = require('chai')
-const expect = chai.expect;
+const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
-chai.use(chaiAsPromised);
+
 const MemoryNonceStore = require('../MemoryNonceStore.js');
 
+const { expect } = chai;
+chai.use(chaiAsPromised);
+
+// Create a top-level store object so we can create new versions of it
 let store;
 
 let nextIndex = 0;
-function genNonce() {
-  let nonce = 'new-nonce-' + nextIndex;
-  nextIndex++;
+const genNonce = () => {
+  const nonce = 'new-nonce-' + nextIndex;
+  nextIndex += 1;
   return nonce;
-}
-function genTimestamp() {
-  return Date.now()/1000;
-}
+};
+const genTimestamp = () => {
+  return Date.now() / 1000;
+};
 
 describe('MemoryNonceStore', function () {
   beforeEach(function () {
@@ -35,50 +38,50 @@ describe('MemoryNonceStore', function () {
       .rejectedWith('No nonce included.');
     expect(store.check(null, genTimestamp())).to.eventually.be
       .rejectedWith('No nonce included.');
-      // Spaces string nonce
-      expect(store.check(' ')).to.eventually.be
-        .rejectedWith('No nonce included.');
-      expect(store.check(' ', genTimestamp())).to.eventually.be
-        .rejectedWith('No nonce included.');
+    // Spaces string nonce
+    expect(store.check(' ')).to.eventually.be
+      .rejectedWith('No nonce included.');
+    expect(store.check(' ', genTimestamp())).to.eventually.be
+      .rejectedWith('No nonce included.');
   });
 
   it('Rejects empty timestamps', function () {
     // Null timestamp
-    expect(store.check(genNonce(),null)).to.eventually.be
+    expect(store.check(genNonce(), null)).to.eventually.be
       .rejectedWith('No timestamp.');
     // Undefined timestamp
     expect(store.check(genNonce())).to.eventually.be
       .rejectedWith('No timestamp.');
     // Empty timestamp
-    expect(store.check(genNonce(),'')).to.eventually.be
+    expect(store.check(genNonce(), '')).to.eventually.be
       .rejectedWith('No timestamp.');
     // Lots of spaces timestamp
-    expect(store.check(genNonce(),'  ')).to.eventually.be
+    expect(store.check(genNonce(), '  ')).to.eventually.be
       .rejectedWith('No timestamp.');
   });
 
   it('Rejects non-number timestamps', function () {
     // Letters
-    expect(store.check(genNonce(),'abcd')).to.eventually.be
+    expect(store.check(genNonce(), 'abcd')).to.eventually.be
       .rejectedWith('Timestamp is not a number.');
     // Alphanumeric
-    expect(store.check(genNonce(),'a1b3c5d6')).to.eventually.be
+    expect(store.check(genNonce(), 'a1b3c5d6')).to.eventually.be
       .rejectedWith('Timestamp is not a number.');
   });
 
   it('Rejects duplicate nonces', function () {
-    let nonce = genNonce();
+    const nonce = genNonce();
     store.check(nonce, genTimestamp())
-    .then(() => {
-      expect(store.check(nonce, genTimestamp())).to.eventually.be
-        .rejectedWith('Nonce already used.');
-    });
+      .then(() => {
+        expect(store.check(nonce, genTimestamp())).to.eventually.be
+          .rejectedWith('Nonce already used.');
+      });
   });
 
   it('Rejects old nonces', function () {
-    let oldDate = new Date();
+    const oldDate = new Date();
     oldDate.setMinutes(oldDate.getMinutes() - 10);
-    expect(store.check(genNonce(), oldDate.getTime()/1000)).to.eventually.be
+    expect(store.check(genNonce(), oldDate.getTime() / 1000)).to.eventually.be
       .rejectedWith('Nonce too old.');
   });
 });
