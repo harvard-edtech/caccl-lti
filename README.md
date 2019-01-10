@@ -38,7 +38,7 @@ app | express app | express app to add routes to | **Required**
 installationCredentials | object | LTI consumer credentials of form: `{ consumer_key, consumer_secret }` | **Required**
 launchPath | string | path to accept launches at (new express POST route added) | /launch
 redirectToAfterLaunch | string | path to redirect to after successful launch | same as launchPath
-nonceStore | NonceStore (see `/docs`) | a nonce store to use for keeping track of used nonces | memory store
+nonceStore | [NonceStore](https://github.com/harvard-edtech/caccl-lti/blob/master/docs/NonceStore.md) | a nonce store to use for keeping track of used nonces | memory store
 disableAuthorizeOnLaunch | boolean | if false, redirects to authorizePath after launch is validated and parsed (and includes redirectToAfterLaunch) as the 'next link so that caccl-authorizer redirects to redirectToAfterLaunch after finishing authorization | false
 authorizePath | string | the authorization path (as set up by caccl-authorizer, required if disableAUthorizeOnLaunch is true | null
 
