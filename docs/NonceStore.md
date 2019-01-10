@@ -21,4 +21,4 @@ timestampSecs | string or number | the oauth timestamp in seconds
 "Timestamp is not a number." - If timestamp is not a number.  
 "Nonce too old." – If timestamp is before the start of tracking nonces.  
 "Nonce expired." – If timestamp is older than 1 minute.  
-"Nonce already used." – If nonce has already been used.  
+"Nonce already used." – If nonce has already been used.
