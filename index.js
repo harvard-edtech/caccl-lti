@@ -50,10 +50,10 @@ const CANVAS_CUSTOM_PARAMS = [
  *   keeping track of used nonces of form { check } where check is a function:
  *   (nonce, timestamp) => Promise that resolves if valid, rejects if invalid
  * @param {string} [authorizePath] - the authorization path as set up by
- *   caccl-token-manager. Only valid if disableAuthorizeOnLaunch is falsy
+ *   caccl-authorizer. Only valid if disableAuthorizeOnLaunch is falsy
  * @param {boolean} [disableAuthorizeOnLaunch] - if falsy, redirects to
  *   authorizePath after launch is validated and parsed (and includes
- *   redirectToAfterLaunch) as the 'next' link so that caccl-token-manager
+ *   redirectToAfterLaunch) as the 'next' link so that caccl-authorizer
  *   redirects to redirectToAfterLaunch after finishing authorization
  */
 module.exports = (config) => {
@@ -63,8 +63,13 @@ module.exports = (config) => {
     || !config.installationCredentials.consumer_secret
   ) {
     // Required credentials weren't included
-    throw new Error('CACCL LTI Manager can\'t be initialized without installationCredentials of the form: { consumer_key, consumer_secret }!');
+    throw new Error('CACCL LTI can\'t be initialized without installationCredentials of the form: { consumer_key, consumer_secret }!');
   }
+
+  if (!config.app) {
+    throw new Error('CACCL LTI can\'t be initialized without an express app.');
+  }
+
   // Create validator
   const validator = new Validator({
     consumer_key: config.installationCredentials.consumer_key,
@@ -141,7 +146,7 @@ module.exports = (config) => {
         );
       }
 
-      // Save current user id for caccl-token-manager
+      // Save current user id for caccl-authorizer
       req.session.currentUserCanvasId = req.session.launchInfo.userId;
 
       // Save canvas host for caccl
