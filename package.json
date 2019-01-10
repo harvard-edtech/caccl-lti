@@ -1,6 +1,6 @@
 {
   "name": "caccl-lti",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "LTI launch validator for IMS-LTI standard launches.",
   "main": "index.js",
   "scripts": {
