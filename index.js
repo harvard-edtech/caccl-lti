@@ -24,19 +24,6 @@ const splitIfTruthy = (val) => {
   return val;
 };
 
-/**
- * Checks if a value is found in a list
- * @param [val] - value to search for
- * @param {array} [list] - the list to search through
- * @return true if the value is found
- */
-const valueInList = (val, list) => {
-  if (!val || !list) {
-    return false;
-  }
-  return (list.indexOf(val) >= 0);
-};
-
 // List of Canvas custom param names
 const CANVAS_CUSTOM_PARAMS = [
   'custom_canvas_api_domain',
@@ -122,30 +109,37 @@ module.exports = (config) => {
       };
 
       // Add simpler role booleans
-      req.session.launchInfo.isInstructor = valueInList(
-        'urn:lti:role:ims/lis/Instructor',
-        req.session.launchInfo.extRoles
-      );
-      req.session.launchInfo.isTA = valueInList(
-        'urn:lti:role:ims/lis/TeachingAssistant',
-        req.session.launchInfo.extRoles
-      );
-      req.session.launchInfo.isDesigner = valueInList(
-        'urn:lti:role:ims/lis/ContentDeveloper',
-        req.session.launchInfo.extRoles
-      );
-      req.session.launchInfo.isCreditLearner = valueInList(
-        'urn:lti:role:ims/lis/Learner',
-        req.session.launchInfo.extRoles
-      );
-      req.session.launchInfo.isNonCreditLearner = valueInList(
-        'urn:lti:role:ims/lis/Learner/NonCreditLearner',
-        req.session.launchInfo.extRoles
-      );
-      req.session.launchInfo.isLearner = (
-        req.session.launchInfo.isCreditLearner
-        || req.session.launchInfo.isNonCreditLearner
-      );
+      if (res.session.launchInfo.extRoles) {
+        req.session.launchInfo.isInstructor = (
+          res.session.launchInfo.extRoles.includes(
+            'urn:lti:role:ims/lis/Instructor'
+          )
+        );
+        req.session.launchInfo.isTA = (
+          res.session.launchInfo.extRoles.includes(
+            'urn:lti:role:ims/lis/TeachingAssistant'
+          )
+        );
+        req.session.launchInfo.isDesigner = (
+          res.session.launchInfo.extRoles.includes(
+            'urn:lti:role:ims/lis/ContentDeveloper'
+          )
+        );
+        req.session.launchInfo.isCreditLearner = (
+          res.session.launchInfo.extRoles.includes(
+            'urn:lti:role:ims/lis/Learner'
+          )
+        );
+        req.session.launchInfo.isNonCreditLearner = (
+          res.session.launchInfo.extRoles.includes(
+            'urn:lti:role:ims/lis/Learner/NonCreditLearner'
+          )
+        );
+        req.session.launchInfo.isLearner = (
+          req.session.launchInfo.isCreditLearner
+          || req.session.launchInfo.isNonCreditLearner
+        );
+      }
 
       // Save current user id for caccl-token-manager
       req.session.currentUserCanvasId = req.session.launchInfo.userId;

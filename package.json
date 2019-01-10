@@ -4,7 +4,7 @@
   "description": "LTI launch validator for IMS-LTI standard launches.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --exit",
     "ltitest": "node ./test/lti/spinUpServer.js"
   },
   "repository": {

@@ -6,6 +6,10 @@ const schedule = require('node-schedule');
 const EXPIRY_SEC = 55; // Needs to be at least 10s and no more than 55s
 const EXPIRY_MS = EXPIRY_SEC * 1000;
 
+const isNumber = (val) => {
+  return !!/^-?\d+\.?\d*$/.test(val);
+};
+
 class MemoryNonceStore {
   constructor() {
     // Record start time (nothing older than start will be allowed)
@@ -49,7 +53,7 @@ class MemoryNonceStore {
         return reject(new Error('No timestamp.'));
       }
       // > Check if is a number
-      if (!Number.isNaN(parseFloat(timestampSecs))) {
+      if (!isNumber(timestampSecs)) {
         return reject(new Error('Timestamp is not a number.'));
       }
 
