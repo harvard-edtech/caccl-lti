@@ -1,4 +1,5 @@
 const locks = require('locks');
+const clone = require('fast-clone');
 const schedule = require('node-schedule');
 
 // The max age of an acceptable nonce
@@ -6,7 +7,6 @@ const EXPIRY_SEC = 55; // Needs to be at least 10s and no more than 55s
 const EXPIRY_MS = EXPIRY_SEC * 1000;
 
 class MemoryNonceStore {
-
   constructor() {
     // Record start time (nothing older than start will be allowed)
     this.startTime = Date.now();
@@ -36,7 +36,7 @@ class MemoryNonceStore {
    * @return Promise that resolves if nonce is valid, rejects with error if
    *   nonce is invalid.
    */
-  check(nonce, timestamp) {
+  check(nonce, timestampSecs) {
     return new Promise((resolve, reject) => {
       // Check if nonce
       if (!nonce || nonce.trim().length === 0) {
@@ -45,16 +45,16 @@ class MemoryNonceStore {
 
       // Check timestamp
       // > Check if exists
-      if (!timestamp || (timestamp + '').trim().length === 0) {
+      if (!timestampSecs || (timestampSecs + '').trim().length === 0) {
         return reject(new Error('No timestamp.'));
       }
       // > Check if is a number
-      if (isNaN(timestamp)) {
+      if (!Number.isNaN(parseFloat(timestampSecs))) {
         return reject(new Error('Timestamp is not a number.'));
       }
 
       // Convert oauth timestamp to ms (we now know it's a number)
-      timestamp *= 1000;
+      const timestamp = timestampSecs * 1000;
 
       // > Check if from before start
       if (timestamp < this.startTime) {
@@ -96,7 +96,7 @@ class MemoryNonceStore {
    */
   _rotate() {
     this.isUsedMutex.lock(() => {
-      this.isUsedSecondary = this.isUsedPrime;
+      this.isUsedSecondary = clone(this.isUsedPrime);
       this.isUsedPrime = {};
       this.isUsedMutex.unlock();
     });
