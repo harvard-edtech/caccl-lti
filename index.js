@@ -7,7 +7,7 @@ const Validator = require('./Validator');
  */
 const parseIntIfTruthy = (val) => {
   if (val) {
-    return parseInt(val);
+    return parseInt(val, 10);
   }
   return val;
 };
