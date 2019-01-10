@@ -1,14 +1,11 @@
 const locks = require('locks');
 const clone = require('fast-clone');
 const schedule = require('node-schedule');
+const isNumber = require('is-number');
 
 // The max age of an acceptable nonce
 const EXPIRY_SEC = 55; // Needs to be at least 10s and no more than 55s
 const EXPIRY_MS = EXPIRY_SEC * 1000;
-
-const isNumber = (val) => {
-  return !!/^-?\d+\.?\d*$/.test(val);
-};
 
 class MemoryNonceStore {
   constructor() {
