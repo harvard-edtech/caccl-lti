@@ -74,7 +74,12 @@ class Validator {
   _isSignatureValid(req) {
     // Generate signature for verification
     // > Build URL
-    const path = urlLib.parse(req.originalUrl || req.url).pathname;
+    const originalUrl = req.originalUrl || req.url;
+    if (!originalUrl) {
+      // No url: cannot sign the request
+      return false;
+    }
+    const path = urlLib.parse(originalUrl).pathname;
     const url = req.protocol + '://' + req.headers.host + path;
     // > Remove oauth signature from body
     const body = clone(req.body);
