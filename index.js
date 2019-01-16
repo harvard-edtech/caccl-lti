@@ -114,29 +114,29 @@ module.exports = (config) => {
       };
 
       // Add simpler role booleans
-      if (res.session.launchInfo.extRoles) {
+      if (req.session.launchInfo.extRoles) {
         req.session.launchInfo.isInstructor = (
-          res.session.launchInfo.extRoles.includes(
+          req.session.launchInfo.extRoles.includes(
             'urn:lti:role:ims/lis/Instructor'
           )
         );
         req.session.launchInfo.isTA = (
-          res.session.launchInfo.extRoles.includes(
+          req.session.launchInfo.extRoles.includes(
             'urn:lti:role:ims/lis/TeachingAssistant'
           )
         );
         req.session.launchInfo.isDesigner = (
-          res.session.launchInfo.extRoles.includes(
+          req.session.launchInfo.extRoles.includes(
             'urn:lti:role:ims/lis/ContentDeveloper'
           )
         );
         req.session.launchInfo.isCreditLearner = (
-          res.session.launchInfo.extRoles.includes(
+          req.session.launchInfo.extRoles.includes(
             'urn:lti:role:ims/lis/Learner'
           )
         );
         req.session.launchInfo.isNonCreditLearner = (
-          res.session.launchInfo.extRoles.includes(
+          req.session.launchInfo.extRoles.includes(
             'urn:lti:role:ims/lis/Learner/NonCreditLearner'
           )
         );
