@@ -93,7 +93,6 @@ class Validator {
         this.consumer_secret
       )
     );
-
     return (generatedSignature === req.body.oauth_signature);
   }
 }

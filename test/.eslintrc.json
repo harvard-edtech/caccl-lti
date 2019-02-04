@@ -5,5 +5,9 @@
   "rules": {
     "prefer-arrow-callback": "off",
     "func-names": ["error","never"]
+  },
+  "globals": {
+    "itd": false,
+    "driver": false
   }
 }

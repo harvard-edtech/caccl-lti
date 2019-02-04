@@ -73,7 +73,7 @@ module.exports = (config) => {
         if (!config.disableAuthorizeOnLaunch) {
           // We're authorizing on launch, so redirect to the authorize path and
           // include redirectToAfterLaunch as the 'next' url
-          return res.redirect(`${config.launchPath}?next=${redirectToAfterLaunch}`);
+          return res.redirect(`${launchPath}?next=${redirectToAfterLaunch}`);
         }
         // Not authorizing on launch. Redirect to redirectToAfterLaunch
         return res.redirect(redirectToAfterLaunch);
