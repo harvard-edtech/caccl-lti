@@ -9,8 +9,8 @@ const path = require('path');
 const oauth = require('oauth-signature');
 require('dce-selenium');
 
-const initAuthorizer = require('..');
-const valid = require('./examples/launches/valid.js');
+const initAuthorizer = require('../..');
+const valid = require('../examples/launches/valid.js');
 
 const {
   consumerSecret,
@@ -100,8 +100,8 @@ const initApp = async function (driver) {
 /*                                  Tests                                 */
 /*------------------------------------------------------------------------*/
 
-describe('caccl-lti', function () {
-  itd('Accepts valid launches', async function (driver) {
+describeS('caccl-lti', function () {
+  itS('Accepts valid launches', async function (driver) {
     const kill = await initApp();
 
     let error;
