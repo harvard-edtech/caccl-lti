@@ -117,7 +117,7 @@ describe('MemoryNonceStore', function () {
   });
 
   it('Accepts valid nonces', function () {
-    return expect(store.check(genNonce(), new Date().getTime() / 1000))
+    return expect(store.check(genNonce(), Date.now() / 1000))
       .to.eventually.be.fulfilled;
   });
 });
