@@ -38,7 +38,7 @@ module.exports = (launchBodyOrig, req) => {
   req.session.launchInfo = {
     timestamp: launchBody.oauth_timestamp * 1000,
     contextId: launchBody.context_id,
-    contextLabel: launchBody.contextLabel,
+    contextLabel: launchBody.context_label,
     canvasHost: launchBody.custom_canvas_api_domain,
     courseId: parseIntIfTruthy(launchBody.custom_canvas_course_id),
     enrollmentState: launchBody.custom_canvas_enrollment_state,
