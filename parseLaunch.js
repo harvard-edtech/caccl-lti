@@ -34,6 +34,10 @@ const CANVAS_CUSTOM_PARAMS = [
 
 module.exports = (launchBodyOrig, req) => {
   const launchBody = launchBodyOrig || req.body;
+
+  // Save launched variable to session
+  req.sesion.launched = true;
+
   // Parse launch and save it to session
   req.session.launchInfo = {
     timestamp: launchBody.oauth_timestamp * 1000,
