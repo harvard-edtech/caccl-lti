@@ -36,7 +36,7 @@ module.exports = (launchBodyOrig, req) => {
   const launchBody = launchBodyOrig || req.body;
 
   // Save launched variable to session
-  req.sesion.launched = true;
+  req.session.launched = true;
 
   // Parse launch and save it to session
   req.session.launchInfo = {
