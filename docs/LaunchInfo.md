@@ -24,6 +24,7 @@ isNonCreditLearner | boolean | true if user is a learner not for credit in the l
 isLearner | boolean | true if user is any type of learner in the launch course
 extRoles | string[] | list of ext Canvas roles of the launch user
 customParams | object | list of custom launch parameters (name => value [string])
+originalLTILaunchBody | object | the original LTI launch body, unparsed
 
 ## Other Properties:
 
@@ -41,3 +42,4 @@ returnURL | string | launch presentation return URL
 launchAppTitle | string | title of the app that was launched
 roles | string[] | list of depricated Canvas roles
 canvasInstance | string | name of the Canvas instance the user launched from
+resourceLinkId | string | the resource link id

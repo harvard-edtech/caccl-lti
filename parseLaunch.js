@@ -64,6 +64,8 @@ module.exports = (launchBodyOrig, req) => {
     roles: splitIfTruthy(launchBody.roles),
     canvasInstance: launchBody.tool_consumer_instance_name,
     userImage: launchBody.user_image,
+    resourceLinkId: launchBody.resource_link_id,
+    originalLTILaunchBody: launchBody,
   };
 
   // Add simpler role booleans
