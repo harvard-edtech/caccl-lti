@@ -80,7 +80,7 @@ class Validator {
       return false;
     }
     const path = urlLib.parse(originalUrl).pathname;
-    const url = req.protocol + '://' + req.headers.host + path;
+    const url = 'https://' + req.headers.host + path;
     // > Remove oauth signature from body
     const body = clone(req.body);
     delete body.oauth_signature;
