@@ -35,20 +35,20 @@
     "url": "^0.11.0"
   },
   "devDependencies": {
-    "body-parser": "^1.18.3",
+    "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "dce-selenium": "^1.0.23",
+    "dce-selenium": "^1.0.41",
     "eslint": "^5.16.0",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-plugin-import": "^2.17.2",
-    "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-react": "^7.12.4",
-    "express": "^4.16.4",
-    "express-session": "^1.16.1",
+    "eslint-config-airbnb": "^17.1.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.2",
+    "express": "^4.17.1",
+    "express-session": "^1.16.2",
     "fs": "0.0.1-security",
     "https": "^1.0.0",
     "mocha": "^5.2.0",
-    "prompt-sync": "^4.1.6"
+    "prompt-sync": "^4.1.7"
   }
 }
