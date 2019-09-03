@@ -30,6 +30,9 @@ const CANVAS_CUSTOM_PARAMS = [
   'custom_canvas_user_id',
   'custom_canvas_user_login_id',
   'custom_canvas_workflow_state',
+  'custom_canvas_assignment_title',
+  'custom_canvas_assignment_points_possible',
+  'custom_canvas_assignment_id',
 ];
 
 module.exports = (launchBodyOrig, req) => {
@@ -60,13 +63,57 @@ module.exports = (launchBodyOrig, req) => {
     userLastName: launchBody.lis_person_name_family,
     userFullName: launchBody.lis_person_name_full,
     userFirstName: launchBody.lis_person_name_given,
-    launchAppTitle: launchBody.resource_link_title,
     roles: splitIfTruthy(launchBody.roles),
     canvasInstance: launchBody.tool_consumer_instance_name,
     userImage: launchBody.user_image,
     resourceLinkId: launchBody.resource_link_id,
     originalLTILaunchBody: launchBody,
   };
+
+  // Detect launch type
+  const wasAssignmentLaunch = (
+    launchBody.custom_canvas_assignment_id
+    && launchBody.custom_canvas_assignment_title
+    && launchBody.custom_canvas_assignment_points_possible
+  );
+  req.session.launchInfo.launchType = (
+    wasAssignmentLaunch
+      ? 'assignment'
+      : 'navigation'
+  );
+
+  // Parse assignment launch
+  if (wasAssignmentLaunch) {
+    // Parse custom params
+    req.session.launchInfo.assignment = {
+      id: parseIntIfTruthy(launchBody.custom_canvas_assignment_id),
+      name: launchBody.custom_canvas_assignment_title,
+      pointsPossible: launchBody.custom_canvas_assignment_points_possible,
+    };
+
+    // Parse outcomes
+    const acceptedDataValues = (
+      launchBody.ext_outcome_data_values_accepted.split(',')
+    );
+    req.session.launchInfo.outcome = {
+      url: launchBody.lis_outcome_service_url,
+      sourcedId: launchBody.lis_result_sourcedid,
+      urlSubmissionAccepted: acceptedDataValues.includes('url'),
+      textSubmissionAccepted: acceptedDataValues.includes('text'),
+      totalScoreAccepted: (
+        launchBody.ext_outcome_result_total_score_accepted
+        && launchBody.ext_outcome_result_total_score_accepted === 'true'
+      ),
+      submittedAtAccepted: (
+        launchBody.ext_outcome_submission_submitted_at_accepted
+        && launchBody.ext_outcome_submission_submitted_at_accepted === 'true'
+      ),
+    };
+  } else {
+    // Navigation launch
+    req.session.launchInfo.launchAppTitle = launchBody.resource_link_title;
+  }
+
 
   // Add simpler role booleans
   if (req.session.launchInfo.extRoles) {
