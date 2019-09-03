@@ -88,7 +88,8 @@ module.exports = (launchBodyOrig, req) => {
     req.session.launchInfo.assignment = {
       id: parseIntIfTruthy(launchBody.custom_canvas_assignment_id),
       name: launchBody.custom_canvas_assignment_title,
-      pointsPossible: launchBody.custom_canvas_assignment_points_possible,
+      pointsPossible:
+        parseIntIfTruthy(launchBody.custom_canvas_assignment_points_possible),
     };
 
     // Parse outcomes
