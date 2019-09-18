@@ -158,12 +158,12 @@ module.exports = (launchBodyOrig, req) => {
   ) {
     // NOTE: Keep these values up-to-date with all the session variables added
     // by caccl-authorizer
-    delete req.session.accessToken;
-    delete req.session.refreshToken;
-    delete req.session.accessTokenExpiry;
-    delete req.session.authorized;
-    delete req.session.authFailed;
-    delete req.session.authFailureReason;
+    req.session.accessToken = undefined;
+    req.session.refreshToken = undefined;
+    req.session.accessTokenExpiry = undefined;
+    req.session.authorized = undefined;
+    req.session.authFailed = undefined;
+    req.session.authFailureReason = undefined;
   }
 
   // Save current user id for caccl-authorizer
