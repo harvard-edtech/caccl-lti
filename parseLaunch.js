@@ -149,6 +149,23 @@ module.exports = (launchBodyOrig, req) => {
     );
   }
 
+  // Remove tokens if user just launched as someone else
+  if (
+    req.session
+    && req.session.currentUserCanvasId
+    && req.session.launchInfo.userId
+    && (req.session.launchInfo.userId !== req.session.currentUserCanvasId)
+  ) {
+    // NOTE: Keep these values up-to-date with all the session variables added
+    // by caccl-authorizer
+    delete req.session.accessToken;
+    delete req.session.refreshToken;
+    delete req.session.accessTokenExpiry;
+    delete req.session.authorized;
+    delete req.session.authFailed;
+    delete req.session.authFailureReason;
+  }
+
   // Save current user id for caccl-authorizer
   req.session.currentUserCanvasId = req.session.launchInfo.userId;
 
