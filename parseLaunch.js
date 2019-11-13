@@ -183,8 +183,12 @@ module.exports = (launchBodyOrig, req) => {
       // Not a custom parameter. Skip!
       return;
     }
+
+    // Rename prop without "custom_" prefix
+    const shorterPropName = prop.substring(7);
+
     // Save custom parameter
-    req.session.launchInfo.customParams[prop] = launchBody[prop];
+    req.session.launchInfo.customParams[shorterPropName] = launchBody[prop];
   });
 
   // Save session
