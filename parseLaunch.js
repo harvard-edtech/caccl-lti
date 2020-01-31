@@ -1,5 +1,6 @@
 /**
  * Returns parsed value of val if val is truthy, otherwise just returns val
+ * @author Gabe Abrams
  * @param val - value to parse if truthy
  * @return value (parsed as int if truthy)
  */
@@ -12,6 +13,7 @@ const parseIntIfTruthy = (val) => {
 
 /**
  * Returns split array of val if val is truthy, otherwise just returns val
+ * @author Gabe Abrams
  * @param val - value to split if truthy
  * @return value (split on "," if truthy)
  */
@@ -35,6 +37,14 @@ const CANVAS_CUSTOM_PARAMS = [
   'custom_canvas_assignment_id',
 ];
 
+/**
+ * Parses an LTI launch body and saves results to the session under
+ *   req.session.launched (set to true) and req.session.launchInfo (contains
+ *   all launch information...see /docs/LaunchInfo.md for more info)
+ * @author Gabe Abrams
+ * @param {object} launchBody - the body of the launch request
+ * @param {Express Request} req - express request instance
+ */
 module.exports = (launchBodyOrig, req) => {
   const launchBody = launchBodyOrig || req.body;
 

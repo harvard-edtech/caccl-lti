@@ -1,13 +1,16 @@
+// Import libraries
 const oauth = require('oauth-signature');
 const clone = require('fast-clone');
 const urlLib = require('url');
 
+// Import local modules
 const MemoryNonceStore = require('./MemoryNonceStore');
 
 /* LTI launch validator */
 class Validator {
   /**
    * Creates a new Validator
+   * @author Gabe Abrams
    * @param {string} consumer_key - an LTI consumer id to compare against during
    *   launch validation
    * @param {string} consumer_secret - an LTI consumer secret to use for
@@ -19,7 +22,7 @@ class Validator {
   constructor(config = {}) {
     this.nonceStore = config.nonceStore || new MemoryNonceStore();
 
-    // Consumer credentials
+    // Verify and save consumer credentials
     if (!config.consumer_secret) {
       throw new Error('Validator requires consumer_secret');
     }
@@ -32,6 +35,7 @@ class Validator {
 
   /**
    * Checks if an LTI launch request is valid
+   * @author Gabe Abrams
    * @param {object} req - Express request object to verify
    * @return {Promise} promise that resolves if valid, rejects if invalid
    */
@@ -56,6 +60,7 @@ class Validator {
 
   /**
    * Checks if a nonce is valid
+   * @author Gabe Abrams
    * @param {object} req - Express request object to verify
    * @return Promise that resolves if valid, rejects if invalid
    */
@@ -68,6 +73,7 @@ class Validator {
 
   /**
    * Checks if an oauth_signature is valid
+   * @author Gabe Abrams
    * @param {object} req - Express request object to verify
    * @return boolean, true if req.body.oauth_signature is valid
    */
