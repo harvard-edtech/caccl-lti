@@ -168,9 +168,7 @@ module.exports = (launchBodyOrig, req) => {
   ) {
     // NOTE: Keep these values up-to-date with all the session variables added
     // by caccl-authorizer
-    req.session.accessToken = undefined;
-    req.session.refreshToken = undefined;
-    req.session.accessTokenExpiry = undefined;
+    req.accessToken = undefined;
     req.session.authorized = undefined;
     req.session.authFailed = undefined;
     req.session.authFailureReason = undefined;
