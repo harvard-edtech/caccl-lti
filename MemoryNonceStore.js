@@ -32,6 +32,7 @@ class MemoryNonceStore {
 
   /**
    * Checks if a new nonce is valid, mark it as used
+   * @author Gabe Abrams
    * @param {string} nonce - OAuth nonce
    * @param {string} timestamp - OAuth timestamp
    * @return Promise that resolves if nonce is valid, rejects with error if
@@ -94,6 +95,7 @@ class MemoryNonceStore {
   /**
    * Performs a maintenance rotation: nonces are moved from
    *   isUsedPrime => isUsedSecondary and nonces in isUsedSecondary are deleted
+   * @author Gabe Abrams
    */
   _rotate() {
     this.isUsedMutex.lock(() => {

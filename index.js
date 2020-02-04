@@ -1,10 +1,11 @@
+// Import local modules
 const Validator = require('./Validator');
-
 const parseLaunch = require('./parseLaunch');
 
 /**
  * Create a new validator and sets up route for launch validation and lti
  *   launch information extraction
+ * @author Gabe Abrams
  * @param {object} app - express app to add routes to
  * @param {string} installationCredentials.consumer_key - an LTI consumer key to
  *   compare against during launch validation
@@ -25,6 +26,7 @@ const parseLaunch = require('./parseLaunch');
  *   redirects to redirectToAfterLaunch after finishing authorization
  */
 module.exports = (config) => {
+  // Throw error if credentials aren't included
   if (
     !config.installationCredentials
     || !config.installationCredentials.consumer_key
@@ -34,6 +36,7 @@ module.exports = (config) => {
     throw new Error('CACCL LTI can\'t be initialized without installationCredentials of the form: { consumer_key, consumer_secret }!');
   }
 
+  // Throw error if no express app is included
   if (!config.app) {
     throw new Error('CACCL LTI can\'t be initialized without an express app.');
   }
@@ -51,7 +54,11 @@ module.exports = (config) => {
 
   // Set up launch parser middleware
   config.app.use(launchPath, (req, res, next) => {
-    // Add function that parses an LTI launch body
+    /**
+     * Parse launch request
+     * @author Gabe Abrams
+     * @param {object} [launchBody=current request body] - the LTI launch body
+     */
     req._parseLaunch = (launchBody) => {
       return parseLaunch(launchBody || req.body, req);
     };
@@ -60,28 +67,33 @@ module.exports = (config) => {
   });
 
   // Handle POST launch requests
-  config.app.post(launchPath, (req, res) => {
+  config.app.post(launchPath, async (req, res) => {
     // This is an LTI launch. Handle it
     // Validate the launch request
-    validator.isValid(req)
-      .then(() => {
-        // This is a valid launch request
-        return req._parseLaunch();
-      })
-      .then(() => {
-        // Session saved! Now redirect.
-        if (!config.disableAuthorizeOnLaunch) {
-          // We're authorizing on launch, so redirect to the authorize path and
-          // include redirectToAfterLaunch as the 'next' url
-          return res.redirect(`${launchPath}?next=${redirectToAfterLaunch}`);
-        }
-        // Not authorizing on launch. Redirect to redirectToAfterLaunch
-        return res.redirect(redirectToAfterLaunch);
-      })
-      .catch(() => {
-        // Invalid launch request or an error occurred while validating/parsing
-        // launch request
-        return res.status(403).send('We couldn\'t validate your authorization to use this app. Please try launch the app again. If you continue to have problems, please contact an admin.');
-      });
+    try {
+      // Validate
+      await validator.isValid(req);
+
+      // Request is valid! Parse the launch
+      req._parseLaunch();
+
+      // Session saved! Now redirect to continue
+      if (!config.disableAuthorizeOnLaunch) {
+        // We are allowed to authorize on launch, so redirect to the authorize
+        // path and include redirectToAfterLaunch as the 'next' url
+        return res.redirect(`${launchPath}?next=${redirectToAfterLaunch}`);
+      }
+
+      // Not authorizing on launch. Immediately go to redirectToAfterLaunch
+      return res.redirect(redirectToAfterLaunch);
+    } catch (err) {
+      // Invalid launch request or an error occurred while validating/parsing
+      // launch request
+      return (
+        res
+          .status(403)
+          .send('We couldn\'t validate your authorization to use this app. Please try launch the app again. If you continue to have problems, please contact an admin.')
+      );
+    }
   });
 };
