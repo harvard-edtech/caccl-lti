@@ -128,6 +128,12 @@ module.exports = (launchBodyOrig, req) => {
 
   // Add simpler role booleans
   if (req.session.launchInfo.extRoles) {
+    const isAdmin = req.session.launchInfo.extRoles.includes(
+      'urn:lti:instrole:ims/lis/Administrator'
+    );
+    if (isAdmin) {
+      req.session.launchInfo.isAdmin = true;
+    }
     req.session.launchInfo.isInstructor = (
       req.session.launchInfo.extRoles.includes(
         'urn:lti:role:ims/lis/Instructor'
