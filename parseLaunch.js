@@ -165,6 +165,17 @@ module.exports = (launchBodyOrig, req) => {
     );
   }
 
+  // Don't allow strange combinations of duplicate roles
+  if (
+    req.session.launchInfo.isInstructor
+    || req.session.launchInfo.isTA
+    || req.session.launchInfo.isDesigner
+  ) {
+    req.session.launchInfo.isLearner = false;
+    req.session.launchInfo.isCreditLearner = false;
+    req.session.launchInfo.isNonCreditLearner = false;
+  }
+
   // Remove tokens if user just launched as someone else
   if (
     req.session
