@@ -163,6 +163,14 @@ module.exports = (launchBodyOrig, req) => {
       req.session.launchInfo.isCreditLearner
       || req.session.launchInfo.isNonCreditLearner
     );
+    req.session.launchInfo.notInCourse = (
+      !req.session.launchInfo.isInstructor
+      && !req.session.launchInfo.isTA
+      && !req.session.launchInfo.isDesigner
+      && !req.session.launchInfo.isCreditLearner
+      && !req.session.launchInfo.isNonCreditLearner
+      && !req.session.launchInfo.isLearner
+    );
   }
 
   // Don't allow strange combinations of duplicate roles
