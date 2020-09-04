@@ -65,6 +65,7 @@ isDesigner | boolean | true if the user is a designer in the launch course
 isCreditLearner | boolean | true if the user is a for-credit learner (student) in the launch course
 isNonCreditLearner | boolean | true if the user is a not-for-credit learner (student) in the launch course
 isLearner | boolean | true if the user any type of learner (student) in the launch course
+notInCourse | boolean | true if the user is not enrolled in the course
 extRoles | string[] | list of extended Canvas roles
 roles | string[] | list of basic Canvas roles (outdated)
 locale | string | user locale (e.g., "en")
