@@ -9,6 +9,7 @@ Property | Type | Description
 timestamp | number (ms) | launch timestamp
 canvasHost | string | Canvas host of the launch (where the user launched from)
 courseId | number | Canvas courseId of the course the user launched from
+courseLisId | number | Learning Information Services identifier for the course offering
 userId | number | Canvas userId of the user who initiated the launch
 userLoginId | string | loginId of the user who initiated the launch
 userFirstName | string | launch user's first name
