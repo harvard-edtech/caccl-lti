@@ -88,7 +88,7 @@ customParams | object | mapping (key => value) listing all custom launch paramet
 Property | Type | Description
 :--- | :--- | :---
 courseId | number | Canvas course id of the launch course
-courseLisId | number | Learning Information Services identifier for the course offering
+sisCourseId | number | Learning Information Services identifier for the course offering
 enrollmentState | string | Canvas enrollment state (e.g., "active")
 
 #### Canvas Info
