@@ -73,6 +73,7 @@ module.exports = (launchBodyOrig, req) => {
     userLastName: launchBody.lis_person_name_family,
     userFullName: launchBody.lis_person_name_full,
     userFirstName: launchBody.lis_person_name_given,
+    sisCourseId: launchBody.lis_course_offering_sourcedid,
     roles: splitIfTruthy(launchBody.roles),
     canvasInstance: launchBody.tool_consumer_instance_name,
     userImage: launchBody.user_image,
