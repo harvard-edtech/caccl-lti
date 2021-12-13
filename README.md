@@ -20,7 +20,7 @@ const initLTI = require('caccl-lti');
 
 initLTI({
   app: /* express app with express-sessions enabled */,
-  installationCredentials: /* { consumer_key, consume_secret }*/,
+  installationCredentials: /* { consumer_key, consumer_secret }*/,
 });
 ```
 
