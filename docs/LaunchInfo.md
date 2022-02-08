@@ -23,6 +23,8 @@ isDesigner | boolean | true if user is a designer in the launch course
 isCreditLearner | boolean | true if user is a learner for credit in the launch course
 isNonCreditLearner | boolean | true if user is a learner not for credit in the launch course
 isLearner | boolean | true if user is any type of learner in the launch course
+isTTM | boolean | true if user is any type teaching team member in the course (ta, instructor, designer)
+notInCourse | boolean | true if user is not in the course
 extRoles | string[] | list of ext Canvas roles of the launch user
 customParams | object | list of custom launch parameters (name => value [string])
 launchType | string | the type of LTI launch (either 'navigation' or 'assignment')
