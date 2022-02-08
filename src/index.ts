@@ -3,6 +3,7 @@ import express from 'express';
 
 // Import shared types
 import NonceStore from './types/NonceStore';
+import LaunchInfo from './types/LaunchInfo';
 
 // Import shared constants
 import CACCL_PATHS from './constants/CACCL_PATHS';
@@ -13,6 +14,10 @@ import parseLaunch from './parseLaunch';
 
 // Import Nonce Store
 import MemoryNonceStore from './MemoryNonceStore';
+
+/*------------------------------------------------------------------------*/
+/*                               Initializer                              */
+/*------------------------------------------------------------------------*/
 
 /**
  * Create a new validator and sets up route for launch validation and lti
@@ -28,7 +33,7 @@ import MemoryNonceStore from './MemoryNonceStore';
  * @param [nonceStore=memory store] a nonce store to use for
  *   keeping track of used nonces
  */
-export default (
+const init = (
   opts: {
     app: express.Application,
     installationCredentials: {
@@ -76,7 +81,10 @@ export default (
   // Handle POST launch requests
   app.post(
     CACCL_PATHS.LAUNCH,
-    async (req, res) => {
+    async (
+      req: express.Request,
+      res: express.Response,
+    ) => {
       // This is an LTI launch. Handle it
       // Validate the launch request
       try {
@@ -106,4 +114,45 @@ export default (
       }
     },
   );
+};
+
+/*------------------------------------------------------------------------*/
+/*                             Session Parser                             */
+/*------------------------------------------------------------------------*/
+
+/**
+ * Extract launch info from user's session
+ * @author Gabe Abrams
+ * @param req express request object or undefined if the user has not
+ *   successfully launched via LTI
+ * @returns info on user's current LTI launch status
+ */
+const parseReq = (
+  req: express.Request,
+): {
+  launched: boolean,
+  launchInfo?: LaunchInfo,
+} => {
+  if (
+    req
+    && req.session
+    && req.session.launchInfo
+  ) {
+    return {
+      launched: true,
+      launchInfo: req.session.launchInfo,
+    };
+  }
+  return {
+    launched: false,
+  };
+};
+
+/*------------------------------------------------------------------------*/
+/*                                 Export                                 */
+/*------------------------------------------------------------------------*/
+
+export default {
+  init,
+  parseReq,
 };

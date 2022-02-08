@@ -3,7 +3,7 @@ import LaunchInfo from './types/LaunchInfo';
 declare module 'express-session' {
     interface SessionData {
         launchInfo: LaunchInfo;
-        authInfo: any;
+        authInfo: unknown;
     }
 }
 /**

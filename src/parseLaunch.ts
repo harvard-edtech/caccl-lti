@@ -8,48 +8,19 @@ import AssignmentDescription from './types/AssignmentDescription';
 import OutcomeDescription from './types/OutcomeDescription';
 
 /*------------------------------------------------------------------------*/
-/*                           Add Type to Session                          */
+/*                             Augment Session                            */
 /*------------------------------------------------------------------------*/
 
 declare module 'express-session' {
   interface SessionData {
-    // For CACCL-LTI
     launchInfo: LaunchInfo,
-    // For CACCL-AUTHORIZER
-    authInfo: any,
+    authInfo: unknown,
   }
 }
 
 /*------------------------------------------------------------------------*/
-/*                                 Helpers                                */
+/*                                Constants                               */
 /*------------------------------------------------------------------------*/
-
-/**
- * Returns parsed value of val if value was included, otherwise returns
- *   undefined
- * @author Gabe Abrams
- * @param val value to parse if truthy
- * @returns parsed as int if value was included
- */
-const parseIntIfTruthy = (val: any): (number | undefined) => {
-  if (val !== undefined) {
-    return Number.parseInt(val, 10);
-  }
-  return undefined;
-};
-
-/**
- * Returns split array of val if value was included, otherwise returns undefined
- * @author Gabe Abrams
- * @param val value to split
- * @returns value split on "," if a value was included
- */
-const splitIfTruthy = (val: any): (string[] | undefined) => {
-  if (val) {
-    return String(val).split(',');
-  }
-  return undefined;
-};
 
 // List of Canvas custom param names
 const CANVAS_CUSTOM_PARAMS = [
@@ -64,6 +35,10 @@ const CANVAS_CUSTOM_PARAMS = [
   'custom_canvas_assignment_id',
 ];
 
+/*------------------------------------------------------------------------*/
+/*                                   Main                                 */
+/*------------------------------------------------------------------------*/
+
 /**
  * Parses an LTI launch body and saves results to the session under
  *   req.session.launched (set to true) and req.session.launchInfo (contains
@@ -77,7 +52,7 @@ const parseLaunch = (req: express.Request) => {
   /*----------------------------------------*/
 
   // Extract body
-  const launchBody = req.body;
+  const launchBody = (req as any).body;
 
   // Detect launch type
   const wasAssignmentLaunch = (
