@@ -1,10 +1,9 @@
 {
   "name": "caccl-lti",
-  "version": "2.0.0.beta.0",
+  "version": "2.0.0-beta.0",
   "description": "LTI launch validator for IMS-LTI standard launches.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
-  "private": true,
   "scripts": {
     "build": "tsc --project ./tsconfig.json"
   },
