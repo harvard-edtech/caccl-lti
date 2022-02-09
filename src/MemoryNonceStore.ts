@@ -118,7 +118,7 @@ class MemoryNonceStore implements NonceStore {
    */
   _rotate() {
     this.isUsedMutex.lock(() => {
-      this.isUsedSecondary = clone(this.isUsedPrime);
+      this.isUsedSecondary = new Set<string>(clone(this.isUsedPrime));
       this.isUsedPrime = new Set<string>();
       this.isUsedMutex.unlock();
     });
