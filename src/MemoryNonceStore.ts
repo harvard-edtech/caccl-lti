@@ -70,7 +70,7 @@ class MemoryNonceStore implements NonceStore {
         return reject(new Error('No timestamp.'));
       }
       // > Check if is a number
-      if (!Number.isNaN(Number.parseInt(String(timestampSecs)))) {
+      if (Number.isNaN(Number.parseInt(String(timestampSecs)))) {
         return reject(new Error('Timestamp is not a number.'));
       }
 

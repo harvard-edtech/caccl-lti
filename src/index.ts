@@ -106,6 +106,7 @@ const init = (
       } catch (err) {
         // Invalid launch request or an error occurred while validating/parsing
         // launch request
+        console.log(err);
         return (
           res
             .status(403)

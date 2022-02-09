@@ -37,7 +37,7 @@ class Validator {
     },
   ) {
     // Initialize nonce store
-    this.nonceStore = this.nonceStore;
+    this.nonceStore = opts.nonceStore;
 
     // Verify and save consumer credentials
     if (!opts.consumer_secret) {
