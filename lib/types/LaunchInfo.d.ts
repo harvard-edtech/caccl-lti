@@ -5,7 +5,7 @@ import OutcomeDescription from './OutcomeDescription';
  * Shared launch info (independent of launch type)
  * @author Gabe Abrams
  */
-declare type SharedLaunchInfo = {
+interface SharedLaunchInfo {
     timestamp: number;
     canvasHost: string;
     courseId: number;
@@ -43,7 +43,7 @@ declare type SharedLaunchInfo = {
     originalLTILaunchBody: {
         [k in string]: any;
     };
-};
+}
 /**
  * Type for launch info that's added to user's session
  * @author Gabe Abrams

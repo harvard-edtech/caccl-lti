@@ -6,7 +6,7 @@ import OutcomeDescription from './OutcomeDescription';
  * Shared launch info (independent of launch type)
  * @author Gabe Abrams
  */
-type SharedLaunchInfo = {
+interface SharedLaunchInfo {
   // Launch timestamp
   timestamp: number,
   // Canvas host of the launch(where the user launched from)

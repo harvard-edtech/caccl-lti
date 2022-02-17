@@ -7,9 +7,6 @@ import urlLib from 'url';
 // Import shared types
 import NonceStore from './types/NonceStore';
 
-// Import local modules
-const MemoryNonceStore = require('./MemoryNonceStore');
-
 class Validator {
   // Initialize nonce store
   private nonceStore: NonceStore;

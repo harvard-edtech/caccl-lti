@@ -2,7 +2,7 @@
  * Type for description of outcomes
  * @author Gabe Abrams
  */
-type OutcomeDescription = {
+interface OutcomeDescription {
   // The outcome service url
   url: string,
   // The LTI passback sourcedid

@@ -1,6 +1,5 @@
 // Import libs
 import locks from 'locks';
-import clone from 'fast-clone';
 import schedule from 'node-schedule';
 
 // Import shared types
