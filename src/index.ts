@@ -153,7 +153,6 @@ const parseReq = (
 /*                                 Export                                 */
 /*------------------------------------------------------------------------*/
 
-export default {
-  init,
-  parseReq,
-};
+export default init;
+
+export { parseReq };

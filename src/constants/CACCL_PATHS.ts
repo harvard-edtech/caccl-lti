@@ -5,6 +5,9 @@ const PREFIX = '/canvas';
  * @author Gabe Abrams
  */
 export default {
-  LAUNCH: `${PREFIX}/launch`, // POST: LTI launch request from Canvas
-  AUTHORIZE: `${PREFIX}/authorize`, // GET: authorize the user for API use
+  LAUNCH: `${PREFIX}/launch`,
+  AUTHORIZE: `${PREFIX}/authorize`,
+  SELF_LAUNCH: `${PREFIX}/launch/self`,
+  FORWARDER_PREFIX: `${PREFIX}/api-forwarder`,
+  HOME: '/',
 };
