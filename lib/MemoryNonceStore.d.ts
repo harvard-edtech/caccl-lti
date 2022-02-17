@@ -23,6 +23,6 @@ declare class MemoryNonceStore implements NonceStore {
      *   isUsedPrime => isUsedSecondary and nonces in isUsedSecondary are deleted
      * @author Gabe Abrams
      */
-    _rotate(): void;
+    private rotate;
 }
 export default MemoryNonceStore;

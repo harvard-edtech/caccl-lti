@@ -1,6 +1,5 @@
 // Import libs
 import locks from 'locks';
-import schedule from 'node-schedule';
 
 // Import shared types
 import NonceStore from './types/NonceStore';
@@ -43,9 +42,12 @@ class MemoryNonceStore implements NonceStore {
     this.isUsedSecondary = new Set<string>()
 
     // Schedule rotation for every minute
-    schedule.scheduleJob('* * * * *', () => {
-      this._rotate();
-    });
+    setInterval(
+      () => {
+        this.rotate();
+      },
+      60000,
+    );
   }
 
   /**
@@ -115,7 +117,7 @@ class MemoryNonceStore implements NonceStore {
    *   isUsedPrime => isUsedSecondary and nonces in isUsedSecondary are deleted
    * @author Gabe Abrams
    */
-  _rotate() {
+  private rotate() {
     this.isUsedMutex.lock(() => {
       this.isUsedSecondary = new Set<string>(this.isUsedPrime);
       this.isUsedPrime = new Set<string>();
