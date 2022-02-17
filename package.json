@@ -20,7 +20,7 @@
     "Validator",
     "CACCL"
   ],
-  "author": "Gabriel Abrams <gabeabrams@gmail.com>",
+  "author": "Gabe Abrams <gabeabrams@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/gabeabrams/lti-launch-validator/issues"
