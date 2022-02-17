@@ -2,7 +2,7 @@
 import express from 'express';
 import oauth from 'oauth-signature';
 import clone from 'fast-clone';
-import urlLib from 'url';
+import parseURL from 'url-parse';
 
 // Import shared types
 import NonceStore from './types/NonceStore';
@@ -94,7 +94,7 @@ class Validator {
       // No url: cannot sign the request
       throw new Error('No URL to use in signature!');
     }
-    const path = urlLib.parse(originalUrl).pathname;
+    const path = parseURL(originalUrl).pathname;
     const url = `${req.protocol}://${req.headers.host}${path}`;
     // > Remove oauth signature from body
     const body = clone(req.body);
