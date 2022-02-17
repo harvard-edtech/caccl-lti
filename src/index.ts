@@ -128,7 +128,7 @@ const init = (
  *   successfully launched via LTI
  * @returns info on user's current LTI launch status
  */
-const parseReq = (
+const getLaunchInfo = (
   req: express.Request,
 ): {
   launched: boolean,
@@ -155,4 +155,4 @@ const parseReq = (
 
 export default init;
 
-export { parseReq };
+export { getLaunchInfo };
