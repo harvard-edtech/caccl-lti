@@ -1,9 +1,10 @@
 import express from 'express';
-import LaunchInfo from './types/LaunchInfo';
+import LaunchInfo from './shared/types/LaunchInfo';
 declare module 'express-session' {
     interface SessionData {
         launchInfo: LaunchInfo;
         authInfo: unknown;
+        cacclLTISelfLaunchState: any;
     }
 }
 /**

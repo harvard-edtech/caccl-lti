@@ -2,10 +2,10 @@
 import express from 'express';
 
 // Import shared types
-import LaunchInfo from './types/LaunchInfo';
-import LaunchType from './types/LaunchType';
-import AssignmentDescription from './types/AssignmentDescription';
-import OutcomeDescription from './types/OutcomeDescription';
+import LaunchInfo from './shared/types/LaunchInfo';
+import LaunchType from './shared/types/LaunchType';
+import AssignmentDescription from './shared/types/AssignmentDescription';
+import OutcomeDescription from './shared/types/OutcomeDescription';
 
 /*------------------------------------------------------------------------*/
 /*                             Augment Session                            */
@@ -15,6 +15,7 @@ declare module 'express-session' {
   interface SessionData {
     launchInfo: LaunchInfo,
     authInfo: unknown,
+    cacclLTISelfLaunchState: any,
   }
 }
 
@@ -46,7 +47,7 @@ const CANVAS_CUSTOM_PARAMS = [
  * @author Gabe Abrams
  * @param req express request instance
  */
-const parseLaunch = (req: express.Request) => {
+const parseLaunch = async (req: express.Request) => {
   /*----------------------------------------*/
   /*              Parse Launch              */
   /*----------------------------------------*/
@@ -187,6 +188,19 @@ const parseLaunch = (req: express.Request) => {
     customParams.set(shorterPropName, String(launchBody[prop]));
   });
 
+  // Self launch data
+  let selfLaunchState: any;
+  if (req.session.cacclLTISelfLaunchState) {
+    // Get self launch state
+    selfLaunchState = req.session.cacclLTISelfLaunchState;
+    // Remove from session
+    req.session.cacclLTISelfLaunchState = undefined;
+    await new Promise((resolve) => {
+      req.session.save(resolve);
+    });
+  }
+  // Remove from session
+
   // Create the launchInfo object
   const launchInfo: LaunchInfo = {
     timestamp: (Number.parseInt(launchBody.oauth_timestamp) * 1000),
@@ -238,6 +252,8 @@ const parseLaunch = (req: express.Request) => {
     assignment,
     outcome,
     launchAppTitle,
+    consumerKey: String(launchBody.oauth_consumer_key),
+    selfLaunchState,
   };
 
   /*----------------------------------------*/

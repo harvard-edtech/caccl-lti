@@ -77,6 +77,10 @@ interface SharedLaunchInfo {
   resourceLinkId: string,
   // Original body of the launch request
   originalLTILaunchBody: { [k in string]: any },
+  // Consumer key
+  consumerKey: string,
+  // State data passed through via self launch
+  selfLaunchState?: any,
 }
 
 /**

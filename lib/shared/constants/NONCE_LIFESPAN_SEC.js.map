@@ -1,0 +1,1 @@
+{"version":3,"file":"NONCE_LIFESPAN_SEC.js","sourceRoot":"","sources":["../../../src/shared/constants/NONCE_LIFESPAN_SEC.ts"],"names":[],"mappings":";;AAAA;;;GAGG;AACH,IAAM,kBAAkB,GAAG,CACzB,OAAO,CAAC,GAAG,CAAC,kBAAkB;IAC5B,CAAC,CAAC,MAAM,CAAC,UAAU,CAAC,OAAO,CAAC,GAAG,CAAC,kBAAkB,CAAC;IACnD,CAAC,CAAC,EAAE,CACP,CAAC;AAEF,kBAAe,kBAAkB,CAAC"}

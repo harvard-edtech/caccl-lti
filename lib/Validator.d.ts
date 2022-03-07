@@ -2,22 +2,22 @@ import express from 'express';
 import NonceStore from './types/NonceStore';
 declare class Validator {
     private nonceStore;
-    private consumer_key;
-    private consumer_secret;
+    private consumerKey;
+    private consumerSecret;
     /**
      * Creates a new Validator
      * @author Gabe Abrams
-     * @param consumer_key an LTI consumer id to compare against during
+     * @param consumerKey an LTI consumer id to compare against during
      *   launch validation
-     * @param consumer_secret an LTI consumer secret to use for
+     * @param consumerSecret an LTI consumer secret to use for
      *   signature signing
      * @param nonceStore a nonce store to use for
      *   keeping track of used nonces of form { check } where check is a function:
      *   (nonce, timestamp) => Promise that resolves if valid, rejects if invalid
      */
     constructor(opts: {
-        consumer_key: string;
-        consumer_secret: string;
+        consumerKey: string;
+        consumerSecret: string;
         nonceStore: NonceStore;
     });
     /**
