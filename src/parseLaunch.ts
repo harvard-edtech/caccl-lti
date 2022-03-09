@@ -7,6 +7,9 @@ import LaunchType from './shared/types/LaunchType';
 import AssignmentDescription from './shared/types/AssignmentDescription';
 import OutcomeDescription from './shared/types/OutcomeDescription';
 
+// Check if this is a dev environment
+const thisIsDevEnvironment = (process.env.NODE_ENV === 'development');
+
 /*------------------------------------------------------------------------*/
 /*                             Augment Session                            */
 /*------------------------------------------------------------------------*/
@@ -204,7 +207,11 @@ const parseLaunch = async (req: express.Request) => {
   // Create the launchInfo object
   const launchInfo: LaunchInfo = {
     timestamp: (Number.parseInt(launchBody.oauth_timestamp) * 1000),
-    canvasHost: String(launchBody.custom_canvas_api_domain),
+    canvasHost: (
+      thisIsDevEnvironment
+        ? 'localhost:8088'
+        : String(launchBody.custom_canvas_api_domain)
+    ),
     courseId: Number.parseInt(launchBody.custom_canvas_course_id),
     sisCourseId: String(launchBody.lis_course_offering_sourcedid),
     userId: Number.parseInt(launchBody.custom_canvas_user_id),
