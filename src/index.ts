@@ -15,7 +15,6 @@ import LaunchInfo from './shared/types/LaunchInfo';
 import CACCL_PATHS from './shared/constants/CACCL_PATHS';
 import NONCE_LIFESPAN_SEC from './shared/constants/NONCE_LIFESPAN_SEC';
 import APP_ID_LIFESPAN_SEC from './shared/constants/APP_ID_LIFESPAN_SEC';
-import CACCL_SIM_TOOL_ID from './shared/constants/CACCL_SIM_TOOL_ID';
 
 // Import helpers
 import validateLaunch from './validateLaunch';
@@ -135,13 +134,6 @@ const initLTI = async (opts: LTIConfig) => {
 
         // Get the appId
         let appId: number;
-        // > Use fake value if in development mode
-        if (
-          !appId
-          && thisIsDevEnvironment
-        ) {
-          appId = CACCL_SIM_TOOL_ID;
-        }
         // > Get from query
         if (
           !appId
