@@ -30,7 +30,7 @@ import LTIConfig from './shared/types/LTIConfig';
  *   second token will be used, and so on.
  * @param [selfLaunch.defaultCanvasHost] default Canvas host to use in self
  *   launches
- * @param [authorizeAfterLaunch] if true, redirect the user to the CACCL
+ * @param [dontAuthorizeAfterLaunch] if false, redirect the user to the CACCL
  *   authorizer after a successful LTI launch
  */
 declare const initLTI: (opts: LTIConfig) => Promise<void>;

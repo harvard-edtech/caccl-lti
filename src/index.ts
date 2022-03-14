@@ -54,7 +54,7 @@ import LTIConfig from './shared/types/LTIConfig';
  *   second token will be used, and so on.
  * @param [selfLaunch.defaultCanvasHost] default Canvas host to use in self
  *   launches
- * @param [authorizeAfterLaunch] if true, redirect the user to the CACCL
+ * @param [dontAuthorizeAfterLaunch] if false, redirect the user to the CACCL
  *   authorizer after a successful LTI launch
  */
 const initLTI = async (opts: LTIConfig) => {
@@ -62,7 +62,7 @@ const initLTI = async (opts: LTIConfig) => {
   const {
     app,
     installationCredentials, 
-    authorizeAfterLaunch,
+    dontAuthorizeAfterLaunch,
     selfLaunch,
   } = opts;
   const initNonceStore = (opts.initNonceStore ?? initCACCLMemoryStore);
@@ -257,7 +257,7 @@ const initLTI = async (opts: LTIConfig) => {
         await parseLaunch(req);
 
         // Session saved! Now redirect to continue
-        if (authorizeAfterLaunch) {
+        if (!dontAuthorizeAfterLaunch) {
           // We are allowed to authorize on launch, so redirect to the authorize
           // path and include redirectToAfterLaunch as the 'next' url
           return res.redirect(CACCL_PATHS.AUTHORIZE);

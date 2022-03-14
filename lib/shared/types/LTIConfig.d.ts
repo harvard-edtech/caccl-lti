@@ -11,6 +11,6 @@ declare type LTIConfig = {
     installationCredentials: InstallationCredentials;
     initNonceStore?: InitCACCLStore;
     selfLaunch?: SelfLaunchConfig;
-    authorizeAfterLaunch?: boolean;
+    dontAuthorizeAfterLaunch?: boolean;
 };
 export default LTIConfig;
