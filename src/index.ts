@@ -124,7 +124,11 @@ const initLTI = async (opts: LTIConfig) => {
         }
 
         // Get canvasHost
-        let canvasHost = decodeURIComponent(String(req.query.canvasHost));
+        let canvasHost = (
+          req.query.canvasHost
+            ? decodeURIComponent(String(req.query.canvasHost))
+            : undefined
+        );
         if (!canvasHost && defaultCanvasHost) {
           canvasHost = defaultCanvasHost;
         }
