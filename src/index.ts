@@ -15,11 +15,15 @@ import LaunchInfo from './shared/types/LaunchInfo';
 import CACCL_PATHS from './shared/constants/CACCL_PATHS';
 import NONCE_LIFESPAN_SEC from './shared/constants/NONCE_LIFESPAN_SEC';
 import APP_ID_LIFESPAN_SEC from './shared/constants/APP_ID_LIFESPAN_SEC';
+import CACCL_SIM_TOOL_ID from './shared/constants/CACCL_SIM_TOOL_ID';
 
 // Import helpers
 import validateLaunch from './validateLaunch';
 import parseLaunch from './parseLaunch';
 import LTIConfig from './shared/types/LTIConfig';
+
+// Check if this is a dev environment
+const thisIsDevEnvironment = (process.env.NODE_ENV === 'development');
 
 /*------------------------------------------------------------------------*/
 /*                               Initializer                              */
@@ -71,7 +75,7 @@ const initLTI = async (opts: LTIConfig) => {
   /*              Self Launches             */
   /*----------------------------------------*/
 
-  if (selfLaunch) {
+  if (selfLaunch || thisIsDevEnvironment) {
     // Initialize store
     const appIdStore = await selfLaunch.initAppIdStore(APP_ID_LIFESPAN_SEC);
 
@@ -92,7 +96,7 @@ const initLTI = async (opts: LTIConfig) => {
       CACCL_PATHS.SELF_LAUNCH,
       async (req, res) => {
         // Respond with an error if self launches are not set up
-        if (!selfLaunch) {
+        if (!selfLaunch && !thisIsDevEnvironment) {
           return res.status(404).send('This app is not prepared to be launched from outside of Canvas. Please contact support.');
         }
 
@@ -113,9 +117,17 @@ const initLTI = async (opts: LTIConfig) => {
 
         // Get the appId
         let appId: number;
+        // > Use fake value if in development mode
+        if (
+          !appId
+          && thisIsDevEnvironment
+        ) {
+          appId = CACCL_SIM_TOOL_ID;
+        }
         // > Get from query
         if (
-          req.query.appId
+          !appId
+          && req.query.appId
           && !Number.isNaN(Number.parseInt(String(req.query.appId)))
         ) {
           appId = Number.parseInt(String(req.query.appId));
