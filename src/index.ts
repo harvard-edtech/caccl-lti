@@ -234,6 +234,14 @@ const initLTI = async (opts: LTIConfig) => {
         return res.redirect(url);
       },
     );
+  } else {
+    // Self launches are disabled
+    app.get(
+      CACCL_PATHS.SELF_LAUNCH,
+      (req, res) => {
+        return res.status(404).send('Self launches are not enabled for this app.');
+      },
+    );
   }
 
   /*----------------------------------------*/
