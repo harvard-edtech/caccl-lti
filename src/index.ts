@@ -76,8 +76,31 @@ const initLTI = async (opts: LTIConfig) => {
   /*----------------------------------------*/
 
   if (selfLaunch || thisIsDevEnvironment) {
+    // Get selfLaunch configuration
+    const initAppIdStore = (
+      selfLaunch?.initAppIdStore
+      ?? initCACCLMemoryStore
+    );
+    const hostAppIdMap = (
+      selfLaunch?.hostAppIdMap
+      ?? {}
+    );
+    const courseAppIdMap = (
+      selfLaunch?.courseAppIdMap
+      ?? {}
+    );
+    const adminAccessTokenMap = (
+      selfLaunch?.adminAccessTokenMap
+      ?? {}
+    );
+    const defaultCanvasHost = (
+      thisIsDevEnvironment
+        ? 'localhost:8088'
+        : (selfLaunch?.defaultCanvasHost ?? 'canvas.instructure.com')
+    );
+
     // Initialize store
-    const appIdStore = await selfLaunch.initAppIdStore(APP_ID_LIFESPAN_SEC);
+    const appIdStore = await initAppIdStore(APP_ID_LIFESPAN_SEC);
 
     // Initialize copy of the api
     const api = initAPI();
@@ -95,11 +118,6 @@ const initLTI = async (opts: LTIConfig) => {
     app.get(
       CACCL_PATHS.SELF_LAUNCH,
       async (req, res) => {
-        // Respond with an error if self launches are not set up
-        if (!selfLaunch && !thisIsDevEnvironment) {
-          return res.status(404).send('This app is not prepared to be launched from outside of Canvas. Please contact support.');
-        }
-
         // Get courseId
         const courseId = Number.parseInt(String(req.query.courseId));
         if (!courseId || Number.isNaN(courseId)) {
@@ -108,8 +126,8 @@ const initLTI = async (opts: LTIConfig) => {
 
         // Get canvasHost
         let canvasHost = decodeURIComponent(String(req.query.canvasHost));
-        if (!canvasHost && selfLaunch.defaultCanvasHost) {
-          canvasHost = selfLaunch.defaultCanvasHost;
+        if (!canvasHost && defaultCanvasHost) {
+          canvasHost = defaultCanvasHost;
         }
         if (!canvasHost || canvasHost.trim().length === 0) {
           return res.status(422).send('To self-launch this app, CACCL needs a canvasHost. Please contact support.');
@@ -135,19 +153,19 @@ const initLTI = async (opts: LTIConfig) => {
         // > Get from course map
         if (
           !appId
-          && selfLaunch.courseAppIdMap
-          && selfLaunch.courseAppIdMap[canvasHost]
-          && selfLaunch.courseAppIdMap[canvasHost][courseId]
+          && courseAppIdMap
+          && courseAppIdMap[canvasHost]
+          && courseAppIdMap[canvasHost][courseId]
         ) {
-          appId = selfLaunch.courseAppIdMap[canvasHost][courseId];
+          appId = courseAppIdMap[canvasHost][courseId];
         }
         // > Get from host map
         if (
           !appId
-          && selfLaunch.hostAppIdMap
-          && selfLaunch.hostAppIdMap[canvasHost]
+          && hostAppIdMap
+          && hostAppIdMap[canvasHost]
         ) {
-          appId = selfLaunch.hostAppIdMap[canvasHost];
+          appId = hostAppIdMap[canvasHost];
         }
         // > Look up in store
         if (!appId) {
@@ -160,11 +178,11 @@ const initLTI = async (opts: LTIConfig) => {
           }
         }
         // > Look up via API
-        if (!appId && selfLaunch.adminAccessTokenMap) {
+        if (!appId && adminAccessTokenMap) {
           // Get a list of candidate access tokens
           const accessTokens = (
-            selfLaunch.adminAccessTokenMap[canvasHost]
-            || []
+            adminAccessTokenMap[canvasHost]
+            ?? []
           );
           for (let i = 0; i < accessTokens.length; i++) {
             // Get list of apps
