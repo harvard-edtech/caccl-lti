@@ -106,7 +106,7 @@ const validateLaunch = async (
       .replace(req.hostname, '')
   );
   // Build another url
-  const url = `${req.protocol}://${req.headers.host}${path}`;
+  const url = `https://${req.headers.host}${path}`;
   // > Remove oauth signature from body
   const body = clone(req.body);
   delete body.oauth_signature;
