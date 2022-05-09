@@ -4,7 +4,7 @@ import InitCACCLStore from 'caccl-memory-store/lib/InitCACCLStore';
  * @author Gabe Abrams
  */
 declare type SelfLaunchConfig = {
-    initAppIdStore: InitCACCLStore;
+    initAppIdStore?: InitCACCLStore;
     hostAppIdMap?: {
         [k: string]: number;
     };
