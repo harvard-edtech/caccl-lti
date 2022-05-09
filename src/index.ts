@@ -213,18 +213,6 @@ const initLTI = async (opts: LTIConfig) => {
           return res.status(404).send('This app cannot be launched this way because it is not yet installed into the course that you are launching from. Please contact support.');
         }
 
-        // Store selfLaunchState in session
-        if (req.query.selfLaunchState) {
-          try {
-            // Parse self launch state and store in session
-            req.session.cacclLTISelfLaunchState = JSON.parse(
-              decodeURIComponent(String(req.query.selfLaunchState))
-            );
-          } catch (err) {
-            return res.status(500).send('This app cannot be launched this way because we could not store state before continuing. Please contact support.');
-          }
-        }
-
         // Redirect for self-launch
         const url = `https://${canvasHost}/courses/${courseId}/external_tools/${appId}?display=borderless`;
         return res.redirect(url);

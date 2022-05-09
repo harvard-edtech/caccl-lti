@@ -44,7 +44,6 @@ interface SharedLaunchInfo {
         [k in string]: any;
     };
     consumerKey: string;
-    selfLaunchState?: any;
 }
 /**
  * Type for launch info that's added to user's session

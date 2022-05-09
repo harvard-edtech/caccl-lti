@@ -4,7 +4,7 @@ declare module 'express-session' {
     interface SessionData {
         launchInfo: LaunchInfo;
         authInfo: unknown;
-        cacclLTISelfLaunchState: any;
+        selfLaunchState: any;
     }
 }
 /**

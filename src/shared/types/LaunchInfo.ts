@@ -79,8 +79,6 @@ interface SharedLaunchInfo {
   originalLTILaunchBody: { [k in string]: any },
   // Consumer key
   consumerKey: string,
-  // State data passed through via self launch
-  selfLaunchState?: any,
 }
 
 /**

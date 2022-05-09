@@ -18,7 +18,7 @@ declare module 'express-session' {
   interface SessionData {
     launchInfo: LaunchInfo,
     authInfo: unknown,
-    cacclLTISelfLaunchState: any,
+    selfLaunchState: any,
   }
 }
 
@@ -191,19 +191,6 @@ const parseLaunch = async (req: express.Request) => {
     customParams.set(shorterPropName, String(launchBody[prop]));
   });
 
-  // Self launch data
-  let selfLaunchState: any;
-  if (req.session.cacclLTISelfLaunchState) {
-    // Get self launch state
-    selfLaunchState = req.session.cacclLTISelfLaunchState;
-    // Remove from session
-    req.session.cacclLTISelfLaunchState = undefined;
-    await new Promise((resolve) => {
-      req.session.save(resolve);
-    });
-  }
-  // Remove from session
-
   // Create the launchInfo object
   const launchInfo: LaunchInfo = {
     timestamp: (Number.parseInt(launchBody.oauth_timestamp) * 1000),
@@ -260,7 +247,6 @@ const parseLaunch = async (req: express.Request) => {
     outcome,
     launchAppTitle,
     consumerKey: String(launchBody.oauth_consumer_key),
-    selfLaunchState,
   };
 
   /*----------------------------------------*/
