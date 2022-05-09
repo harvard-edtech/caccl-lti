@@ -356,10 +356,6 @@ const getLaunchInfo = (
  *   Canvas instance containing the course to launch from
  * @param {number} [appId=look up appId] id for this app as it is installed in
  *   Canvas in the course
- * @param {any} [selfLaunchState] self launch state to add to launchInfo
- *   so you can keep track of state through the self launch process. This
- *   object will appear at launchInfo.selfLaunchState. Must be JSONifiable.
- *   Note: this information will be passed in the URL, so it should not
  *   be sensitive data.
  * @returns {string} url to redirect to for starting the self-launch process
  */
@@ -368,14 +364,12 @@ const getSelfLaunchURL = (
     courseId: number,
     canvasHost?: string,
     appId?: number,
-    selfLaunchState?: any,
   },
 ): string => {
   const {
     courseId,
     canvasHost,
     appId,
-    selfLaunchState,
   } = opts;
 
   // Build the URL
@@ -385,9 +379,6 @@ const getSelfLaunchURL = (
   }
   if (appId) {
     url += `&appId=${appId}`;
-  }
-  if (selfLaunchState) {
-    url += `&selfLaunchState=${encodeURIComponent(selfLaunchState)}`;
   }
   
   return url;
