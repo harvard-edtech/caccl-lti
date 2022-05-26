@@ -218,7 +218,7 @@ const parseLaunch = async (req: express.Request) => {
     isTTM,
     notInCourse,
     extRoles,
-    customParams,
+    customParams: Object.fromEntries(customParams),
     contextId: String(launchBody.context_id),
     contextLabel: String(launchBody.context_label),
     enrollmentState: String(launchBody.custom_canvas_enrollment_state),

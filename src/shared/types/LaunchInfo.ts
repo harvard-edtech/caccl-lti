@@ -50,7 +50,7 @@ interface SharedLaunchInfo {
   // List of ext Canvas roles for the launch user
   extRoles: string[],
   // Map of custom launch params (key is name, value is custom parameter value)
-  customParams: Map<string, string>,
+  customParams: { [k: string]: any },
   // LTI launch context id
   contextId: string,
   // LTI launch context label

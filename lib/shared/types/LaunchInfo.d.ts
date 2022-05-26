@@ -27,7 +27,9 @@ interface SharedLaunchInfo {
     isTTM: boolean;
     notInCourse: boolean;
     extRoles: string[];
-    customParams: Map<string, string>;
+    customParams: {
+        [k: string]: any;
+    };
     contextId: string;
     contextLabel: string;
     enrollmentState: string;
