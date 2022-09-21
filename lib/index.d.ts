@@ -40,10 +40,13 @@ declare const initLTI: (opts: LTIConfig) => Promise<void>;
  * @param req express request object
  * @returns info on user's current LTI launch status
  */
-declare const getLaunchInfo: (req: express.Request) => {
-    launched: boolean;
-    launchInfo?: LaunchInfo;
-};
+declare const getLaunchInfo: (req: express.Request) => ({
+    launched: false;
+    launchInfo: undefined;
+} | {
+    launched: true;
+    launchInfo: LaunchInfo;
+});
 /**
  * Get the URL for a self-launch request
  * @author Gabe Abrams

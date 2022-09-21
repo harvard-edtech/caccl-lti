@@ -313,10 +313,20 @@ const initLTI = async (opts: LTIConfig) => {
  */
 const getLaunchInfo = (
   req: express.Request,
-): {
-  launched: boolean,
-  launchInfo?: LaunchInfo,
-} => {
+): (
+  | {
+    // True if launched
+    launched: false,
+    // Launch info
+    launchInfo: undefined,
+  }
+  | {
+    // True if launched
+    launched: true,
+    // Launch info
+    launchInfo: LaunchInfo,
+  } 
+) => {
   if (
     req
     && req.session
@@ -329,6 +339,7 @@ const getLaunchInfo = (
   }
   return {
     launched: false,
+    launchInfo: undefined,
   };
 };
 
