@@ -200,7 +200,10 @@ const initLTI = async (opts: LTIConfig) => {
 
             // Try to find the correct app
             const app = apps.find((candidateApp) => {
-              return candidateApp.url.startsWith(`${req.protocol}://${req.hostname}${CACCL_PATHS.LAUNCH}`);
+              return (
+                candidateApp.url.startsWith(`http://${req.hostname}${CACCL_PATHS.LAUNCH}`)
+                || candidateApp.url.startsWith(`https://${req.hostname}${CACCL_PATHS.LAUNCH}`)
+              );
             });
             if (app) {
               appId = app.id;
