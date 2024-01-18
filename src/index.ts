@@ -200,6 +200,12 @@ const initLTI = async (opts: LTIConfig) => {
 
             // Try to find the correct app
             const app = apps.find((candidateApp) => {
+              // If no url, skip
+              if (!candidateApp.url) {
+                return false;
+              }
+
+              // Check if the url matches
               return (
                 candidateApp.url.startsWith(`http://${req.hostname}${CACCL_PATHS.LAUNCH}`)
                 || candidateApp.url.startsWith(`https://${req.hostname}${CACCL_PATHS.LAUNCH}`)
