@@ -56,12 +56,14 @@ declare const getLaunchInfo: (req: express.Request) => ({
  * @param {number} [appId=look up appId] id for this app as it is installed in
  *   Canvas in the course
  *   be sensitive data.
+ * @param {any} [selfLaunchState] stringifiable self launch data
  * @returns {string} url to redirect to for starting the self-launch process
  */
 declare const getSelfLaunchURL: (opts: {
     courseId: number;
     canvasHost?: string;
     appId?: number;
+    selfLaunchState?: any;
 }) => string;
 export default initLTI;
 export { getLaunchInfo, getSelfLaunchURL };

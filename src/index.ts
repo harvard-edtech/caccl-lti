@@ -222,6 +222,17 @@ const initLTI = async (opts: LTIConfig) => {
           return res.status(404).send('This app cannot be launched this way because it is not yet installed into the course that you are launching from. Please contact support.');
         }
 
+        // Store self launch state
+        if (req.query.selfLaunchState) {
+          // Add self launch state to session
+          req.session.selfLaunchState = JSON.parse(
+            decodeURIComponent(String(req.query.selfLaunchState)),
+          );
+
+          // Store
+          req.session.save();
+        }
+
         // Redirect for self-launch
         const url = `https://${canvasHost}/courses/${courseId}/external_tools/${appId}?display=borderless`;
         return res.redirect(url);
@@ -365,6 +376,7 @@ const getLaunchInfo = (
  * @param {number} [appId=look up appId] id for this app as it is installed in
  *   Canvas in the course
  *   be sensitive data.
+ * @param {any} [selfLaunchState] stringifiable self launch data
  * @returns {string} url to redirect to for starting the self-launch process
  */
 const getSelfLaunchURL = (
@@ -372,12 +384,14 @@ const getSelfLaunchURL = (
     courseId: number,
     canvasHost?: string,
     appId?: number,
+    selfLaunchState?: any,
   },
 ): string => {
   const {
     courseId,
     canvasHost,
     appId,
+    selfLaunchState,
   } = opts;
 
   // Build the URL
@@ -387,6 +401,9 @@ const getSelfLaunchURL = (
   }
   if (appId) {
     url += `&appId=${appId}`;
+  }
+  if (selfLaunchState) {
+    url += `&selfLaunchState=${encodeURIComponent(JSON.stringify(selfLaunchState))}`;
   }
   
   return url;
