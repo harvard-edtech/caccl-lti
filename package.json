@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/gabeabrams/lti-launch-validator#readme",
   "dependencies": {
-    "caccl-api": "^2.6.9",
+    "caccl-api": "^2.6.11",
     "caccl-memory-store": "^2.6.9",
     "express": "^4.17.2",
     "express-session": "^1.17.2",
